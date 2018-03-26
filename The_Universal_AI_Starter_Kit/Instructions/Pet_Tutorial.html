@@ -1,0 +1,296 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en-US">
+<head>
+	<title>Pet Tutorial</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<meta name="keywords" content="instructions, ai, starter, kit, pet, tutorial">
+	<meta name="description" content="A tutorial about pets for The Universal AI Starter Kit.">
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<h1>
+		Table of Contents:</h1>
+	<a href="Pet_Tutorial.html#Instruction1" target="_top">Introduction</a><br>
+	<a href="Pet_Tutorial.html#Step1" target="_top">Part 1 - Step 1</a><br>
+	<a href="Pet_Tutorial.html#Step2" target="_top">Part 1 - Step 2</a><br>
+	<a href="Pet_Tutorial.html#Step3" target="_top">Part 1 - Step 3</a><br>
+	<a href="Pet_Tutorial.html#Step4" target="_top">Part 1 - Step 4</a><br>
+	<a href="Pet_Tutorial.html#Step5" target="_top">Part 2 - Step 5</a><br>
+	<a href="Pet_Tutorial.html#Step6" target="_top">Part 2 - Step 6</a><br>
+	<a href="Pet_Tutorial.html#Step7" target="_top">Part 3 - Step 7</a><br>
+	<a name="Instruction1"></a>
+	<br>
+	<h1>
+		Introduction:</h1>
+	<h3>
+		This is a brief tutorial that will help you to setup a pet for the player. Before starting this tutorial, please make sure you
+		have properly installed The Universal AI Starter Kit. If you have not done so yet, check the installation instructions for the
+		version of Torque you are using.<br>
+		<br>
+		Keep in mind that this is a tutorial; it is meant as a learning tool and thus does not always do everything in the best, most
+		efficient manner. This tutorial is for <i>T3D 1.2.0</i>.<br>
+		<br>
+		If you have not already done so, I recommend that you review the <a href="./Usage_Instructions.html">Usage Instructions</a> to
+		gain a basic understanding of how The UAISK works before starting this tutorial.<br>
+		<br>
+		Part 1 has to be done in order to get parts 2 and 3 working. Parts 2 and 3 are optional; either or both of them can be skipped,
+		depending on what features you would like.
+	</h3>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Step1"></a>
+	<h2>
+		Part 1 - Step 1:</h2>
+	<h3>
+		As always; the first step is to backup all files that are going to be changed. They are:<br>
+		<br>
+		<i>scripts/client/config.cs<br>
+			scripts/client/default.bind.cs<br>
+			scripts/server/commands.cs<br>
+			scripts/server/player.cs<br>
+			scripts/server/UAISK/aiDatablocks.cs<br>
+			scripts/server/UAISK/aiActions.cs<br>
+		</i>
+	</h3>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step2"></a>
+	<h2>
+		Part 1 - Step 2:</h2>
+	<h3>
+		Now we're going to bind our pet spawning to key. This key binding calls a server side command named "SpawningAIPetHere".<br>
+		<br>
+		Check the code comments for more information. You may notice the start and end comments around the code, this is so you can tell
+		what code has been changed later.<br>
+		<br>
+		File- scripts/client/config.cs<br>
+		Add to the end of the file:<br>
+	</h3>
+	<pre>
+//UAISK Pet: Start
+//Make the "j" key call the server to spawn our pet.
+moveMap.bindCmd(keyboard, "j", "commandToServer(\'SpawningAIPetHere\');", "");
+//UAISK Pet: End
+</pre>
+	<h3>
+		If you intent to use this code in your game, you should also paste the above code into the <i>scripts/client/default.bind.cs</i>
+		file. If you're just using this tutorial as an example, then that should not be necessary.
+	</h3>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step3"></a>
+	<h2>
+		Part 1 - Step 3:</h2>
+	<h3>
+		Now we'll add the "SpawningAIPetHere" command that is being called by the key bind we just made. The command gets the player's
+		current position and adds an offset to that position, so the pet doesn't spawn exactly on top of the player. After it has the
+		final position, it then calls a function to actually spawn the AI pet bot.<br>
+		<br>
+		File- scripts/server/commands.cs<br>
+		Add to the end of the file:<br>
+	</h3>
+	<pre>
+//UAISK Pet: Start
+//A server function called by the client to spawn a bot
+function serverCmdSpawningAIPetHere(%client)
+{
+    //Get the player's position.
+    %pos = %client.player.getPosition();
+
+    //Add an offset to that position. For simplicity,
+    //we're just adding a fixed number and we're
+    //not checking if the position is accessible.
+    %pos = vectorAdd(%pos, "2 2 0");
+
+    //Call the AI spawning function.
+    AIPlayer::spawnAtPosition(%pos, "TutPet");
+}
+//UAISK Pet: End
+</pre>
+	<h3>
+		<a href="./Usage_Instructions.html#Instruction31" target="_top">Check here</a> for more information about the "spawnAtPosition"
+		function.
+	</h3>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step4"></a>
+	<h2>
+		Part 1 - Step 4:</h2>
+	<h3>
+		In the last part of the last line in the step above, you may have noticed it says "TutPet". "TutPet" is the name of the datablock
+		that our pet will use when it's spawned. So now we have to make that datablock.<br>
+		<br>
+		File- scripts/server/UAISK/aiDatablocks.cs<br>
+		After the default AI datablock, which looks like the following:<br>
+	</h3>
+	<pre>
+datablock PlayerData(DefaultPlayer : DefaultPlayerData)
+{
+   shapeFile = "art/shapes/actors/gideon/gideon.dts";
+
+   //All values can be commented out if you wish
+   //If you get rid of them, the bot will just use the same values as the player
+
+   maxDamage = 100;
+   maxForwardSpeed = 14;
+   maxBackwardSpeed = 13;
+   maxSideSpeed = 13;
+
+   //AI specific values that can be set for this datablock
+   //These values can be overridden by the spawn marker,
+   //but these values override the defaults
+   Weapon = "RocketLauncher";
+   respawn = true;
+   behavior = "ChaseBehavior";
+   maxRange = 25;
+   minRange = 0;
+   distDetect = 50;
+   sidestepDist = 10;
+   paceDist = 6;
+   npcAction = 1;
+   spawnGroup = 1;
+   fov = 200;
+   leash = 35;
+   cycleCounter = "5";
+   weaponMode = "pattern";
+   activeDodge = 1;
+   team = 2;
+   realName = "Bot";
+};
+</pre>
+	<h3>
+		Add:<br>
+	</h3>
+	<pre>
+//UAISK Pet: Start
+datablock PlayerData(TutPet : DefaultPlayerData)
+{
+   //AI specific values that can be set for this datablock.
+   //We're using the minimum amount of settings that are needed to do what we want to do.
+   behavior = "PetBehavior";
+   respawn = false;
+   team = 1;
+};
+//UAISK Pet: End
+</pre>
+	<h3>
+		In the first line of the above code, you may notice that it says "TutPet" whereas the default datablock has "DefaultPlayer" in
+		that location. This is the name of our datablock. <a href="./Usage_Instructions.html#Instruction18" target="_top">Check here</a>
+		for more information about player datablocks.
+	</h3>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Step5"></a>
+	<h2>
+		Part 2 - Step 5:</h2>
+	<h3>
+		After doing the steps above, you can already load a game and press the "j" key to spawn a pet. If you tried to do that, you may
+		have noticed that you can keep pressing it to spawn more and more pets. Now we're going to put a limit on the number of pets
+		you can spawn.<br>
+		<br>
+		File- scripts/server/commands.cs<br>
+		Within the serverCmdSpawningAIPetHere() function we added earlier, change the following:<br>
+	</h3>
+	<pre>
+    //Call the AI spawning function.
+    AIPlayer::spawnAtPosition(%pos, "TutPet");
+</pre>
+	<h3>
+		To:<br>
+	</h3>
+	<pre>
+    //Make sure we don't have too many pets already.
+    //The number at the end is the maximum pet count, which you can change.
+    if (%client.petCount < 2)
+    {
+        //Call the AI spawning function
+        AIPlayer::spawnAtPosition(%pos, "TutPet");
+        //Increment the number of pets we have.
+        %client.petCount++;
+    }
+</pre>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step6"></a>
+	<h2>
+		Part 2 - Step 6:</h2>
+	<h3>
+		Now the player can have a maximum of two pets. But if one of the pets dies, the player can't replace them. Let's fix that.<br>
+		<br>
+		File- scripts/server/player.cs<br>
+		Function- Armor::damage()<br>
+		After:<br>
+	</h3>
+	<pre>
+   if (%obj.getState() $= "Dead")
+   {
+      if (%obj.isbot == true)
+      {
+</pre>
+	<h3>
+		Add follow inside of that "if":<br>
+	</h3>
+	<pre>
+         //UAISK Pet: Start
+         //If the thing that just died is using the datablock we made, subtract 1 from our variable.
+         if (%obj.getDatablock().getName() $= "TutPet")
+         {
+            //Allow the player to spawn another pet.
+            if (isObject(%obj.master))
+                %obj.master.getControllingClient().petCount--;
+            //A backup in case the player is dead at the same time the pet dies.
+            else
+                LocalClientConnection.petCount--;
+         }
+         //UAISK Pet: End
+</pre>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Step7"></a>
+	<h2>
+		Part 3 - Step 7:</h2>
+	<h3>
+		As a final example, lets have our pets die after a certain period of time.<br>
+		<br>
+		File- scripts/server/UAISK/aiActions.cs<br>
+		Function- AIPlayer::spawnAtPosition()<br>
+		Replace:<br>
+	</h3>
+	<pre>
+    if (%block.spawnGroup !$= "")
+        %group = %block.spawnGroup;
+    else    
+        %group = $AISK_SPAWN_GROUP;
+</pre>
+	<h3>
+		With:<br>
+	</h3>
+	<pre>
+    //UAISK Pet: Start
+    //Get a good starting value for our pet's group number.
+    if ($AIPetGroups == 0)
+        $AIPetGroups = 3;
+
+    //Set our pet to have its own group so it can be killed later.
+    %group = $AIPetGroups++;
+
+    //Set how long we want the pet to live in milliseconds.
+    %time = 15 * 1000;
+
+    //Schedule the pet to die after that time is up.
+    schedule(%time, %marker, "AIPlayer::actionByGroup", %group, "kill");
+    //UAISK Pet: End
+</pre>
+	<h3>
+		In the last line of the above code, you may notice that we call an action function via a schedule. <a href="./Usage_Instructions.html#Instruction14"
+			target="_top">Check here</a> for more information about actions.
+	</h3>
+</body>
+</html>

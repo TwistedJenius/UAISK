@@ -1,0 +1,221 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en-US">
+<head>
+	<title>UAISK/AFX2 Usage Instructions</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<meta name="keywords" content="AFX, usage, insall, instructions, ai, starter, kit">
+	<meta name="description" content="Insall and usage instructions for The UAISK/AFX2 integration.">
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<h1>
+		Table of Contents:</h1>
+	<a href="AFX2_Interop_Instructions.html#Instruction1" target="_top">UAISK/AFX2 Integration Overview</a><br>
+	<a class="Steps1" href="AFX2_Interop_Instructions.html#Instruction2" target="_top">Features List</a><br>
+	<a href="AFX2_Interop_Instructions.html#Instruction7" target="_top">Installation Instructions</a><br>
+	<a href="AFX2_Interop_Instructions.html#Instruction5" target="_top">Spells As Weapons</a><br>
+	<a class="Steps1" href="AFX2_Interop_Instructions.html#Instruction6" target="_top">Using Spells on Bots</a><br>
+	<a href="AFX2_Interop_Instructions.html#Instruction3" target="_top">Heal Bots</a><br>
+	<a href="AFX2_Interop_Instructions.html#Instruction4" target="_top">Known Issues</a><br>
+	<br>
+	<a name="Instruction1"></a>
+	<h1>
+		UAISK/AFX2 Integration Overview:</h1>
+	<h3>
+		This document only lists and instructs on the changes that occur between a stock version of 
+		The Universal AI Starter Kit and the <a href="https://github.com/faustlogic/Torque3D-plus-AFX" target="_blank">
+				Arcane-FX 2</a> integrated version. For a full and complete list of all The UAISK's features and how to use them, reference
+		the standard <a href="Usage_Instructions.html" target="_blank">Usage Instructions</a>.
+		If you have not already done so, it is recommended that you start off by using the stock version of The UAISK and only attempt
+		to use the AFX2 integrated version after you are familiar with that.
+	</h3>
+	<a name="Instruction2"></a>
+	<h2>
+		Features List:</h2>
+	<ul class="List1">
+		<li>General compatibility; the two kits can be used separately within the same game without errors.</li>
+		<li>All stock UAISK and AFX2 features are available.</li>
+		<li>Bot resurrection and corpse disposal work as expected.</li>
+		<li>Spells can be used like weapons.</li>
+		<li>There's now a special behavior, behavioral trait, and NPC action for bots to use spells that require a "friend" target. These
+			bots are also able to resurrect a dead player.</li>
+		<li>"Summon Feckless Moth" now summons a Feckless Moth pet for the player; while limiting the player to only having one at a time.</li>
+	</ul>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Instruction7"></a>
+	<h1>
+		Installation Instructions:</h1>
+	<h3>
+		After downloading AFX2, install The UAISK in the <i>Full_AFX</i> template, but use the files within the <i>UAISK_AFX</i> folder
+		instead of the files in the <i>UAISK</i> folder. Make sure to delete
+		any .dso files for the files that you replaced. You may want to backup all of your files before merging in the new files.<br>
+		<br>
+		These files should only be used if you are starting from a fresh copy of the AFX2 template. If you are using a different
+		version of the engine, or starting from a copy that has had any type of modification at all,
+		you will need to manually merge in any changes. Changes made in each file have been marked with:</h3>
+	<pre>
+//UAISK+AFX Interop Change
+</pre>
+	<h3>
+		The one exception is the file <i>aiWeapons.cs</i>, which does not have its changes commented.<br>
+		<br>
+		After you have replaced the files, open up a mission within AFX2 and press "alt a" to open the AI Marker Editor. If you need
+		farther assistance, check the instructions below and the standard <a href="Usage_Instructions.html" target="_blank">Usage Instructions</a>.
+	</h3>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Instruction5"></a>
+	<h1>
+		Spells As Weapons:</h1>
+	<h3>
+		Spells can be used in much the same way as standard weapons. If the current spell can be interrupted by movement, the bot stops
+		moving while casting. The new global variable <i>$AISK_AFX_WAIT_TIME</i> is related to this feature. If the bot's casting is
+		interrupted (by damage or otherwise), it will begin moving again as needed.<br>
+		<br>
+		Spells can be used with all 4 weapon modes. Much like with normal weapons, the bot will choose the correct spell to start with
+		based on their weapon mode. Bots are able to mix and match weapons, spells and not using any weapon/spell. The "-random" weapon
+		setting can also be used with spells.<br>
+		<br>
+		The bot's mana is taken into account before a spell cast is attempted. The spell's range and damage radius are taken into account
+		so that the bot can cast without hitting itself.<br>
+		<br>
+		Bots are able to properly mix and match friend and enemy targeting spells. Bots will not use an enemy spell on a friendly target,
+		or a friendly spell on an enemy target. If an incorrect target is selected; a new, proper target will be automatically reselected.
+		However, resurrection can still only be done by bots using the <i>HealBot</i> behavior.<br>
+		<br>
+		<a href="Usage_Instructions.html#Instruction19" target="_blank">For more information about weapons, check here.</a><br>
+		<br>
+		The following table shows the AFX2 spell equivalents for all AI specific weapon datablock variables. Most are already a part
+		of the stock AFX2 spell datablocks.<br>
+	</h3>
+	<table class="Values1">
+		<tr>
+			<th>
+				Variable Name
+			</th>
+			<th>
+				AFX2 Spell Equivalent
+			</th>
+		</tr>
+		<tr>
+			<td>
+				ignoreDistance
+			</td>
+			<td>
+				range
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				usesAmmo
+			</td>
+			<td class="Rows1">
+				(Has no AFX2 equivalent.)
+			</td>
+		</tr>
+		<tr>
+			<td>
+				fireDelay
+			</td>
+			<td>
+				(Can be given to AFX2 spells.)
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				triggerDown
+			</td>
+			<td class="Rows1">
+				castingDur
+			</td>
+		</tr>
+		<tr>
+			<td>
+				minIgnoreDistance
+			</td>
+			<td>
+				areaDamageRadius
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				weapRating
+			</td>
+			<td class="Rows1">
+				(Can be given to AFX2 spells.)
+			</td>
+		</tr>
+		<tr>
+			<td>
+				weapStartAmmo
+			</td>
+			<td>
+				(Has no AFX2 equivalent.)
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				notAim
+			</td>
+			<td class="Rows1">
+				(Can be given to AFX2 spells.)
+			</td>
+		</tr>
+	</table>
+	<h3>
+		<a href="Usage_Instructions.html#Instruction9" target="_blank">For more information about weapon datablock values, check here.</a>
+	</h3>
+	<a name="Instruction6"></a>
+	<h2>
+		Using Spells on Bots:</h2>
+	<h3>
+		In general, most spells affect bots in much the same way that they affect the player. Bot resurrection and corpse disposal work
+		as expected.<br>
+		<br>
+		When on fire or cursed from spells such as "<i>Ring of Fire</i>", "<i>Up In Flames</i>", or "<i>Arcane in the Membrane</i>";
+		the bot enters a confused state which greatly reduces their view distance, makes them shoot/cast less often, and makes them run
+		around erratically.
+	</h3>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Instruction3"></a>
+	<h1>
+		Heal Bots:</h1>
+	<h3>
+		To make a heal bot, give your marker the following settings:<br>
+	</h3>
+	<pre>
+Behavior = HealBotBehavior;
+npcAction = 5;
+team = 1;
+</pre>
+	<h3>
+		You should also give the marker a friendly targeting spell such as "<i>Spirit of Roach</i>" or "<i>Bron-Y-Orc Stomp</i>" to use
+		as a weapon. The bot will use a spell whenever the player has 95% or less health. The new <i>HealBotBehavior</i> adds a new behavioral
+		trait, the <i>isResBot</i> trait. This new trait, when given to a non-aggressive behavior, allows the bots to resurrect the player
+		if set to use npcAction 5, which is the same action that allows the bot to cast other spells on the player.<br>
+		<br>
+		<a href="Usage_Instructions.html#Instruction12" target="_blank">For more information about non-aggressive behaviors, check here.</a>
+	</h3>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Instruction4"></a>
+	<h1>
+		Known Issues:</h1>
+	<ul class="List1">
+		<li>Due to the way that datablocks are handled in AFX2, the AI may have poor aim with some non-spell weapons in the T3D version.</li>
+		<li>AI markers made with a non-AFX2 version of The UAISK may not work with the AFX2 compatible build due to the way that datablocks
+			are handled in AFX2. This may cause your AI markers not to be shown using the correct player model.</li>
+		<li>The way that the "Chill Kill" and "Ice Shards Prop" spells are setup doesn't allow the bot's to see an enemy stuck inside the
+			ice. However if the bot is inside the ice, it can still see enemies on the outside.</li>
+		<li>The damage, impulse, and other effects from some spells do not respect the team system (including the friendly fire setting),
+			and some or all of those may still be applied regardless of which team the caster and target are on.</li>
+		<li>There may be a few additional issues if you are attempting to merge The UAISK with AFX2 for T3D.</li>
+	</ul>
+</body>
+</html>

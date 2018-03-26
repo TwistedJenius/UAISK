@@ -1,0 +1,109 @@
+body
+{
+	background-color: #F9F9F9;
+	margin: 35px;
+	font-family: Arial;
+	font-weight: normal;
+	font-size: 13px;
+	color: Black;
+}
+a:link
+{
+	color: #0000FF;
+	font-size: 14px;
+}
+a:visited
+{
+	color: #990099;
+	font-size: 14px;
+}
+a:hover
+{
+	color: #CC0000;
+	font-size: 14px;
+}
+a:active
+{
+	color: #CC0000;
+	font-size: 14px;
+}
+a.Steps1
+{
+	margin-left: 20px;
+}
+a.Details1
+{
+	color: #CC0000;
+}
+hr.Line1
+{
+	color: #0000B9;
+	width: 100%;
+}
+hr.Line2
+{
+	color: #B90000;
+	width: 100%;
+}
+h1
+{
+	font-size: 22px;
+}
+h2
+{
+	font-size: 16px;
+}
+h3
+{
+	font-size: 13px;
+	font-weight: normal;
+}
+pre
+{
+	font-style: italic;
+	background-color: #EEDDFF;
+}
+table.Values1
+{
+	border-width: 1px;
+	border-spacing: 2px;
+	border-style: outset;
+	border-color: gray;
+	border-collapse: separate;
+	background-color: white;
+}
+table.Values1 th 
+{
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+	background-color: #DDDDDD;
+}
+table.Values1 td
+{
+	border-width: 1px;
+	padding: 1px;
+	border-style: inset;
+	border-color: gray;
+}
+table.Values1 td.Rows1
+{
+	background-color: #EEEEFF;
+}
+ul.List1
+{
+	font-size: 13px;
+	font-weight: normal;
+}
+ol.List2
+{
+	font-size: 13px;
+	font-weight: normal;
+}
+span.Warn1
+{
+	font-size: 13px;
+	font-weight: bold;
+	color: #EE0000;
+}

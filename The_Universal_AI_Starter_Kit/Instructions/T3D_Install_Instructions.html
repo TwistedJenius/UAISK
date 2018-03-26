@@ -1,0 +1,305 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en-US">
+<head>
+	<title>T3D Installation Instructions</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<meta name="keywords" content="T3D, installation, instructions, ai, starter, kit">
+	<meta name="description" content="Installation instructions for The Universal AI Starter Kit.">
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<h1>
+		Table of Contents:</h1>
+	<a href="T3D_Install_Instructions.html#Instruction3" target="_top">Quick Install Instructions</a><br>
+	<a href="T3D_Install_Instructions.html#Instruction1" target="_top">Custom Install Instructions</a><br>
+	<a class="Steps1" href="T3D_Install_Instructions.html#Step1" target="_top">Step 1</a><br>
+	<a class="Steps1" href="T3D_Install_Instructions.html#Step2" target="_top">Step 2</a><br>
+	<a class="Steps1" href="T3D_Install_Instructions.html#Step3" target="_top">Step 3</a><br>
+	<a class="Steps1" href="T3D_Install_Instructions.html#Step4" target="_top">Step 4</a><br>
+	<a class="Steps1" href="T3D_Install_Instructions.html#Step5" target="_top">Step 5</a><br>
+	<a class="Steps1" href="T3D_Install_Instructions.html#Step6" target="_top">Step 6</a><br>
+	<a class="Steps1" href="T3D_Install_Instructions.html#Step7" target="_top">Step 7</a><br>
+	<a class="Steps1" href="T3D_Install_Instructions.html#Step8" target="_top">Step 8</a><br>
+	<a class="Steps1" href="T3D_Install_Instructions.html#Step9" target="_top">Step 9</a><br>
+	<a href="T3D_Install_Instructions.html#Instruction2" target="_top">Optional Custom Install Instructions</a><br>
+	<a class="Steps1" href="T3D_Install_Instructions.html#Step13" target="_top">Step 1</a><br>
+	<a name="Instruction3"></a>
+	<br>
+	<h1>
+		Quick Install Instructions:</h1>
+	<h3>
+		For a quick install, simply replace the stock Torque files with the files that came with this kit. The file structure should
+		remain the same. Make sure to delete any .dso files for the files that you replaced.<br>
+		<br>
+		A quick install should only be used if you are starting from a fresh project in
+		<a href="https://github.com/GarageGames/Torque3D" target="_blank"><i>T3D MIT 3.10.0</i></a>. If you are
+		using a different version of the engine, or starting from a project that has had any type of modification at all, you should
+		use a custom install instead. But for clean copies of the correct version, a quick install is the recommended installation
+		method. Both the quick install and custom install are made to work using the "Full" template only.<br>
+		<br>
+		After you have replaced the files, open up a new mission within that project and press "alt a" to open the AI Marker Editor.
+		If you need farther assistance, check the <a href="Usage_Instructions.html" target="_top">Usage Instructions</a>.
+	</h3>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Instruction1"></a>
+	<br>
+	<h1>
+		Custom Install Instructions:</h1>
+	<h3>
+		A custom install should be used when integrating The Universal AI Starter Kit into a pre-existing project. Doing a custom install
+		is not needed if you can or have done a quick install. The instructions in this section are mandatory for a custom install, optional
+		instructions are below. These instructions are for a new project created using the "full" template in <i>T3D 1.2.0</i>. If you're
+		unclear on exactly how/where something should be installed, use the quick install files as an example.<br>
+	</h3>
+	<br>
+	<a name="Step1"></a>
+	<h2>
+		Step 1:</h2>
+	<h3>
+		Backup all files that are going to be changed. They are:<br>
+		<br>
+		<i>art/datablocks/weapons/Ryder.cs<br>
+			scripts/server/gameCore.cs<br>
+			scripts/server/weapon.cs<br>
+			scripts/server/scriptExec.cs</i>
+	</h3>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step2"></a>
+	<h2>
+		Step 2:</h2>
+	<h3>
+		File- art/datablocks/weapons/Ryder.cs<br>
+		Function- datablock ItemData(Ryder)<br>
+		Add to the end of the datablock:<br>
+	</h3>
+	<pre>
+   //AISK Changes: Start
+   //Set the max distance a bot will fire this weapon from
+   ignoreDistance = 50;
+   //Set the min distance a bot will fire this weapon from
+   minIgnoreDistance = 0;
+   //Set if this weapon uses ammo or not
+   usesAmmo = true;
+   //Sets how long the bot waits between firing bursts
+   fireDelay = 1000;
+   //Sets how long the bot holds down the trigger when firing. Use longer pulses for spray and pray type weapons.
+   triggerDown = 50;
+   //Sets the relative quality score of the weapon, how good is the weapon?
+   //This should be set to a different value for every weapon.
+   weapRating = 5;
+   //The amount of ammo that bots using this weapon should start with.
+   weapStartAmmo = 10;
+   //Enemies using this weapon are unable to aim or move while firing it.
+   notAim = false;
+   //AISK Changes: End
+</pre>
+	<h3>
+		<b>Note:</b> This same procedure also needs to be done with any other weapons you have in your game.<br>
+	</h3>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step3"></a>
+	<h2>
+		Step 3:</h2>
+	<h3>
+		File- scripts/server/gameCore.cs<br>
+		Function- GameCore::startGame()<br>
+		Right after:<br>
+	</h3>
+	<pre>
+   if ($Game::Running)
+   {
+      error("startGame: End the game first!");
+      return;
+   }
+</pre>
+	<h3>
+		Add:<br>
+	</h3>
+	<pre>
+   //AISK Changes: Start
+   //Prepare the AI spawn markers
+   loadMarkers();
+   //Spawn "all" AI spawn groups
+   AIPlayer::actionByGroup("all", "spawn");
+   //AISK Changes: End
+</pre>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step4"></a>
+	<h2>
+		Step 4:</h2>
+	<h3>
+		File- scripts/server/gameCore.cs<br>
+		Function- GameCore::preparePlayer()<br>
+		Add to the end of the function:<br>
+	</h3>
+	<pre>
+   //AISK Changes: Start
+   //Give the client and player a team
+   if (%client.team $= "")
+     %client.team = 1;
+
+   //Set the player's team based on the client's team
+   %client.player.team = %client.team;
+
+   //Put the player in a SimSet with its teammates
+   TeamSimSets(%client.player, %client.player.team);
+   //AISK Changes: End
+</pre>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step5"></a>
+	<h2>
+		Step 5:</h2>
+	<h3>
+		File- scripts/server/gameCore.cs<br>
+		Function- GameCore::onDeath()<br>
+		Right before:<br>
+	</h3>
+	<pre>
+   // Display damage appropriate kill message
+   %sendMsgFunction = "sendMsgClientKilled_" @ %damageType;
+   if ( !isFunction( %sendMsgFunction ) )
+      %sendMsgFunction = "sendMsgClientKilled_Default";
+   call( %sendMsgFunction, 'MsgClientKilled', %client, %sourceClient, %damLoc );
+</pre>
+	<h3>
+		Add:<br>
+	</h3>
+	<pre>
+   //AISK Changes: Start
+   // Only do all of the below if a player is the killer
+   if (!isObject(%sourceClient))
+      return;
+   //AISK Changes: End
+</pre>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step6"></a>
+	<h2>
+		Step 6:</h2>
+	<h3>
+		File- scripts/server/weapon.cs<br>
+		Function- Weapon::onPickup()<br>
+		Replace the whole function with:<br>
+	</h3>
+	<pre>
+function Weapon::onPickup(%this, %obj, %shape, %amount)
+{
+   // The parent Item method performs the actual pickup.
+   // For player's we automatically use the weapon if the
+   // player does not already have one in hand.
+   if (Parent::onPickup(%this, %obj, %shape, %amount))
+   {
+      serverPlay3D(WeaponPickupSound, %shape.getTransform());
+      if (%shape.getClassName() $= "Player" && %shape.getMountedImage($WeaponSlot) == 0)
+         %shape.use(%this);
+
+      //AISK Changes: Start
+      if (%shape.getClassName() $= "AIPlayer") {
+         %countWeapons = getWordCount(%shape.botWeapon);
+         %shape.botWeapon = setWord(%shape.botWeapon, %countWeapons, %this.getname());
+
+         if (%shape.weaponMode $= "best")
+            sortBestWeapons(%shape);
+      }
+      //AISK Changes: End
+   }
+}
+</pre>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step7"></a>
+	<h2>
+		Step 7:</h2>
+	<h3>
+		File- scripts/server/scriptExec.cs<br>
+		Replace the following:<br>
+	</h3>
+	<pre>
+// Load our player scripts
+exec("./aiPlayer.cs");
+</pre>
+	<h3>
+		With:<br>
+	</h3>
+	<pre>
+//AISK Changes: Start
+// Load our player scripts
+//exec("./aiPlayer.cs");
+exec("./UAISK/aiExecutes.cs");
+//AISK Changes: End
+</pre>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step8"></a>
+	<h2>
+		Step 8:</h2>
+	<h3>
+		In the folder: scripts/server/<br>
+		Add the entire <i>UAISK</i> folder; including all of the files it contains (which should total 14). Make sure to use the correct
+		version for your engine.
+	</h3>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step9"></a>
+	<h2>
+		Step 9:</h2>
+	<h3>
+		Add the following files to the correct locations:<br>
+		<br>
+		<i>tools/worldEditor/gui/AIMarkerEditor.gui<br>
+			tools/worldEditor/scripts/AIMarkerEditor.cs<br>
+			tools/worldEditor/scripts/AIMEMain.cs<br>
+			tools/worldEditor/scripts/AIPathEditor.cs<br>
+		</i>
+		<br>
+		Make sure to use the correct version for your engine.
+	</h3>
+	<hr class="Line2">
+	<br>
+	<a name="Instruction2"></a>
+	<br>
+	<h1>
+		Optional Custom Install Instructions:</h1>
+	<h3>
+		These instructions are an optional part of a custom install. This will add the <a href="Usage_Instructions.html#Instruction23"
+			target="_blank">AI Marker Editor</a> to the bottom of your "Edit" menu within the mission editor. If you're having problems
+		while doing a custom installation, try skipping this part. This step is for the <i>T3D Professional</i> version only and is not
+		included in the quick install files.<br>
+	</h3>
+	<br>
+	<a name="Step13"></a>
+	<h2>
+		Step 1:</h2>
+	<h3>
+		File- tools/worldEditor/scripts/menus.ed.cs<br>
+		Function- EditorGui::buildMenus()<br>
+		After the line:<br>
+	</h3>
+	<pre>
+      item[16] = "PostEffect Manager" TAB "" TAB "Canvas.pushDialog(PostFXManager);";
+</pre>
+	<h3>
+		Add:<br>
+	</h3>
+	<pre>
+      //AISK Changes: Start
+      item[17] = "-";
+      item[18] = "AI Marker Editor" TAB "Alt A" TAB "toggleAIMarkerEditor(1);";
+      //AISK Changes: End
+</pre>
+</body>
+</html>

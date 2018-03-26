@@ -1,0 +1,2237 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en-US">
+<head>
+	<title>Usage Instructions</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<meta name="keywords" content="T3D, usage, instructions, ai, starter, kit">
+	<meta name="description" content="Usage instructions for The Universal AI Starter Kit.">
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<h1>
+		Table of Contents:</h1>
+	<a href="Usage_Instructions.html#Instruction1" target="_top">UAISK Overview</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction2" target="_top">Games by Genre</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction3" target="_top">Features List</a><br>
+	<a href="Usage_Instructions.html#Instruction4" target="_top">Creating New Markers</a><br>
+	<a href="Usage_Instructions.html#Instruction5" target="_top">Description of Variables</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction39" target="_top">Marker and AIPlayer Datablock Descriptions Table</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction40" target="_top">Weapon Datablock Descriptions Table</a><br>
+	<a href="Usage_Instructions.html#Instruction6" target="_top">Setting Variable Values</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction7" target="_top">General Rules</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction8" target="_top">Marker and AIPlayer Datablock Values Table</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction9" target="_top">Weapon Datablock Values Table</a><br>
+	<a href="Usage_Instructions.html#Instruction30" target="_top">Traits</a><br>
+	<a href="Usage_Instructions.html#Instruction10" target="_top">Behaviors</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction11" target="_top">Aggressive Bots</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction12" target="_top">Non-Aggressive Bots</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction33" target="_top">Creating and Modifying Behaviors</a><br>
+	<a href="Usage_Instructions.html#Instruction13" target="_top">Application Programming Interface (API)</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction14" target="_top">Spawning and Killing Bots</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction15" target="_top">Spawning at Objects</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction31" target="_top">Spawning at a Position</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction16" target="_top">Triggers and Items</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction17" target="_top">Changing Teams and Spawn Groups</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction34" target="_top">Special Moves</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction41" target="_top">Explicit Movement</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction42" target="_top">Start on Path</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction37" target="_top">Path Alteration Scripting</a><br>
+	<a href="Usage_Instructions.html#Instruction18" target="_top">Characters</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction38" target="_top">Adding New Characters</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction36" target="_top">Character Animations</a><br>
+	<a href="Usage_Instructions.html#Instruction19" target="_top">Weapons</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction20" target="_top">Using Multiple Weapons</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction21" target="_top">Adding New Weapons</a><br>
+	<a href="Usage_Instructions.html#Instruction32" target="_top">Assisting</a><br>
+	<a href="Usage_Instructions.html#Instruction22" target="_top">Paths</a><br>
+	<a href="Usage_Instructions.html#Instruction23" target="_top">AI Marker Editor</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction24" target="_top">AIME Overview</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction25" target="_top">AIME Object Creation</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction35" target="_top">Path Management</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction26" target="_top">AIME Pages</a><br>
+	<a class="Steps1" href="Usage_Instructions.html#Instruction27" target="_top">AIME Bottom Buttons</a><br>
+	<a href="Usage_Instructions.html#Instruction28" target="_top">Other Variables</a><br>
+	<a href="Usage_Instructions.html#Instruction29" target="_top">FAQs</a><br>
+	<br>
+	<a name="Instruction1"></a>
+	<h1>
+		UAISK Overview:</h1>
+	<h3>
+		Although I've attempted to make this kit as complete and easy to use as possible, you have to remember that this is still "The Universal AI Starter Kit"
+		not "The Completely Finished AI That Will Be Perfect For Your Game No Matter How The Game's Designed... Kit". You <b>will</b> have to make some scripting
+		changes. You may just need a few tweaks (changing some of the variable values around and adding datablocks), or you may need
+		to rewrite significant portions of the code; depending on your game's needs. Remember, the more original you want your gameplay
+		to be, the more your script will probably have to be customized.
+	</h3>
+	<a name="Instruction2"></a>
+	<h2>
+		Games by Genre:</h2>
+	<h3>
+		In general, The Universal AI Starter Kit would work well in: action/adventure games, non-turn based RPGs, platformers, and fast paced shooters<br>
+		<br>
+		But likely wouldn't be as good in: tactical or stealth based shooters, turn based RPGs, fighting games, sports games (including
+		racing), strategy games (RTS or turn based), or games that don't use combat AI (puzzle games, rhythm games, and simulations)<br>
+		<br>
+		Note: If you added in a cover system, this AI would work fairly well in a tactical shooter. If you made a few adjustments to
+		enemy detection, this would work well in a stealth shooter.
+	</h3>
+	<a name="Instruction3"></a>
+	<h2>
+		Features List:</h2>
+	<ul class="List1">
+		<li>Eleven stock behavior modes, including both aggressive and non-aggressive.</li>
+		<li>A team system. Have as many teams and bots as you want.</li>
+		<li>Bots can automatically change weapons based on your specific settings.</li>
+		<li>Easy installation, heavily commented and well documented code.</li>
+		<li>Bots can be set to assist each other and the player.</li>
+		<li>The foundations of a dialogue system.</li>
+		<li>An advanced spawning system. Spawn or kill as many, or as few, bots as you wish to at any time.</li>
+		<li>Advanced movement and navigation that requires no nodes or mesh.</li>
+		<li>Performance optimized enemy targeting.</li>
+		<li>A GUI based spawn marker editor, great for non-programmers.</li>
+		<li>Allows you to create scripted events.</li>
+		<li>Numerous distance, weapon and other variables that can each be set per datablock and/or individual bot.</li>
+		<li>A flexible and modular design lets you add in your own customizations.</li>
+	</ul>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Instruction4"></a>
+	<h1>
+		Creating New Markers:</h1>
+	<h3>
+		An <i>AIPlayerMarker</i> (referred to simply as a "marker" for most of this document) can be made in two different ways, by using
+		the AI Marker Editor or manually.<br>
+		<br>
+		The recommended way is to use the AI Marker Editor. Press "<b>Alt A</b>" to open the AI Marker Editor. Read the tooltips and
+		other editor text for help, it should be relatively intuitive; but if you require farther assistance, see <a href="Usage_Instructions.html#Instruction23"
+			target="_top">the instructions below</a>.<br>
+		<br>
+		Manually placing a marker is done in much the same way as placing any other shape. The exact method differs slightly from engine
+		to engine. Check your version of Torque's documentation for further details.<br>
+		<br>
+		Markers can also be placed within T3D prefabs if you desire.
+	</h3>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Instruction5"></a>
+	<h1>
+		Description of Variables:</h1>
+	<a name="Instruction39"></a>
+	<h2>
+		Marker and AIPlayer Datablock Descriptions Table:</h2>
+	<h3>
+		Here's a description of each of the AI specific variables that can be set for individual markers and/or player datablocks. Check
+		<a href="Usage_Instructions.html#Instruction8" target="_top">here</a> for the values each variable can be.
+	</h3>
+	<table class="Values1">
+		<tr>
+			<th>
+				Variable Name
+			</th>
+			<th>
+				Name In Editor
+			</th>
+			<th>
+				Description of what it does
+			</th>
+		</tr>
+		<tr>
+			<td>
+				fov
+			</td>
+			<td>
+				FOV
+			</td>
+			<td>
+				Aggressive bot's normal field of vision.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				distDetect
+			</td>
+			<td class="Rows1">
+				Detect
+			</td>
+			<td class="Rows1">
+				The range at which a bot will start reacting to a target. This can greatly affect performance.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				maxRange
+			</td>
+			<td>
+				Max Range
+			</td>
+			<td>
+				The maximum distance that the bot wants to get from the player.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				sidestepDist
+			</td>
+			<td class="Rows1">
+				Sidestep
+			</td>
+			<td class="Rows1">
+				This value determines how far a bot sidesteps when it is stuck or dodging.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				paceDist
+			</td>
+			<td>
+				Pace
+			</td>
+			<td>
+				The maximum range the bots pace away from their guard point.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				Weapon
+			</td>
+			<td class="Rows1">
+				Current Weapons
+			</td>
+			<td class="Rows1">
+				Which weapon(s) you want the bot to use. <a class="Details1" href="Usage_Instructions.html#Instruction19" target="_top">Check here
+					for more details.</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				respawn
+			</td>
+			<td>
+				Respawn
+			</td>
+			<td>
+				Controls whether bots respawn automatically or not.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				behavior
+			</td>
+			<td class="Rows1">
+				Behavior
+			</td>
+			<td class="Rows1">
+				Sets how the bot should act. <a class="Details1" href="Usage_Instructions.html#Instruction10" target="_top">Check here for more details.</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				minRange
+			</td>
+			<td>
+				Min Range
+			</td>
+			<td>
+				The minimum distance that the bot wants to get from the player.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				npcAction
+			</td>
+			<td class="Rows1">
+				NPC Action
+			</td>
+			<td class="Rows1">
+				Sets the action that a non-aggressive bot should do. <a class="Details1" href="Usage_Instructions.html#Instruction12" target="_top">
+					Check here for more details.</a>
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Variable Name
+			</th>
+			<th>
+				Name In Editor
+			</th>
+			<th>
+				Description of what it does
+			</th>
+		</tr>
+		<tr>
+			<td>
+				spawnGroup
+			</td>
+			<td>
+				Spawn Group
+			</td>
+			<td>
+				This is used for spawning and killing specified bots. <a class="Details1" href="Usage_Instructions.html#Instruction14" target="_top">
+					Check here for more details.</a>
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				cycleCounter
+			</td>
+			<td class="Rows1">
+				Cycle Counter
+			</td>
+			<td class="Rows1">
+				Sets how often the bot should try to switch to a different weapon. <a class="Details1" href="Usage_Instructions.html#Instruction20"
+					target="_top">Check here for more details.</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				weaponMode
+			</td>
+			<td>
+				Weapon Mode
+			</td>
+			<td>
+				Sets how the next weapon is to be selected. <a class="Details1" href="Usage_Instructions.html#Instruction20" target="_top">Check
+					here for more details.</a>
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				activeDodge
+			</td>
+			<td class="Rows1">
+				Active Dodge
+			</td>
+			<td class="Rows1">
+				The bot will dodge once in this many think cycles while in combat.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				team
+			</td>
+			<td>
+				Team
+			</td>
+			<td>
+				This is used for selecting a target, and can also be used for spawning and killing bots. <a class="Details1" href="Usage_Instructions.html#Instruction14"
+					target="_top">Check here for more details.</a>
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				block
+			</td>
+			<td class="Rows1">
+				Character Type
+			</td>
+			<td class="Rows1">
+				This is the datablock that the bot is spawned as. <a class="Details1" href="Usage_Instructions.html#Instruction18" target="_top">
+					Check here for more details.</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				pathname
+			</td>
+			<td>
+				Path
+			</td>
+			<td>
+				The name of the path that the bot should follow. <a class="Details1" href="Usage_Instructions.html#Instruction22" target="_top">Check
+					here for more details.</a>
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				leash
+			</td>
+			<td class="Rows1">
+				Leash
+			</td>
+			<td class="Rows1">
+				The maximum distance that a bot with the "isLeashed" trait can be away from its leash point.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				realName
+			</td>
+			<td>
+				Bot Name
+			</td>
+			<td>
+				The name that is displayed above the bot's head when names are set to be shown.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				countRespawn
+			</td>
+			<td class="Rows1">
+				Respawn Count
+			</td>
+			<td class="Rows1">
+				The maximum number of times that a bot can respawn.
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Variable Name
+			</th>
+			<th>
+				Name In Editor
+			</th>
+			<th>
+				Description of what it does
+			</th>
+		</tr>
+		<tr>
+			<td>
+				advancedDodge
+			</td>
+			<td>
+				Advanced Dodge
+			</td>
+			<td>
+				Sets the pattern of dodging the bot will use while it is in combat.
+			</td>
+		</tr>
+	</table>
+	<br>
+	<a name="Instruction40"></a>
+	<h2>
+		Weapon Datablock Descriptions Table:</h2>
+	<h3>
+		Here's a description of each of the AI specific variables that can be set for weapon datablocks. These variables can only be
+		set within a weapon's datablock or as an overall default, and are not changeable from within the <a href="Usage_Instructions.html#Instruction23"
+			target="_top">AI Marker Editor</a>. Check <a href="Usage_Instructions.html#Instruction9" target="_top">here</a> for the values
+		each variable can be.
+	</h3>
+	<table class="Values1">
+		<tr>
+			<th>
+				Variable Name
+			</th>
+			<th>
+				Description of what it does
+			</th>
+		</tr>
+		<tr>
+			<td>
+				ignoreDistance
+			</td>
+			<td>
+				The maximum range at which a bot will fire at a target with a given weapon.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				usesAmmo
+			</td>
+			<td class="Rows1">
+				Sets whether or not a weapon uses ammo.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				fireDelay
+			</td>
+			<td>
+				How long the bot waits after firing a burst from the weapon, before it can fire another burst.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				triggerDown
+			</td>
+			<td class="Rows1">
+				How long the bot holds down the trigger when firing a burst.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				minIgnoreDistance
+			</td>
+			<td>
+				The minimum range at which a bot will fire at a target with a given weapon. Useful for explosive weapons.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				weapRating
+			</td>
+			<td class="Rows1">
+				Used to determine which weapon is the best. A higher value means the weapon is better.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				weapStartAmmo
+			</td>
+			<td>
+				The amount of ammo that bots using this weapon should start with.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				notAim
+			</td>
+			<td class="Rows1">
+				Can set enemies to be unable to adjust their aim or move while firing a weapon; but can still move/aim in between firing bursts.
+			</td>
+		</tr>
+	</table>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Instruction6"></a>
+	<h1>
+		Setting Variable Values:</h1>
+	<a name="Instruction7"></a>
+	<h2>
+		General Rules:</h2>
+	<h3>
+		The value placed on a marker overrides both the datablock's value and the overall default. The datablock's value overrides the
+		overall default. The overall default is only used when no other value is given. Which makes the order: Marker's Value > Datablock
+		Value > Overall Default<br>
+		<br>
+		No numbers can be negative or zero unless otherwise noted. Be careful when using values of 1 or less. Distances can use decimal
+		point values (floats), but all other values should use whole integers only (ints). Don't stray too far from the default values;
+		for example- if the default is 6, you probably shouldn't change it to 9006. Capitalization and the order you put the variables
+		in shouldn't matter.<br>
+		<br>
+		When setting values on a marker, it's best to use the <a href="Usage_Instructions.html#Instruction23" target="_top">AI Marker Editor</a>.
+		To set values in a datablock or manually set an <i>AIPlayerMarker</i>'s value, use: <i>name = value;</i>
+	</h3>
+	<br>
+	<a name="Instruction8"></a>
+	<h2>
+		Marker and AIPlayer Datablock Values Table:</h2>
+	<h3>
+		These values are set per marker and/or player datablock. Words in parenthesis such as (numbers), are the type of data that can
+		be used as a value; words in quotes are the exact words that can be used. Check <a href="Usage_Instructions.html#Instruction39"
+			target="_top">here</a> for a description of each variable.
+	</h3>
+	<table class="Values1">
+		<tr>
+			<th>
+				Variable Name
+			</th>
+			<th>
+				Accepted Values
+			</th>
+			<th>
+				Default Value
+			</th>
+			<th>
+				Notes on Values
+			</th>
+		</tr>
+		<tr>
+			<td>
+				fov
+			</td>
+			<td>
+				(numbers)
+			</td>
+			<td>
+				200
+			</td>
+			<td>
+				In degrees, so between 1 and 360.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				distDetect
+			</td>
+			<td class="Rows1">
+				(numbers)
+			</td>
+			<td class="Rows1">
+				50
+			</td>
+			<td class="Rows1">
+				In general, this should be the largest of the distances.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				maxRange
+			</td>
+			<td>
+				(numbers)
+			</td>
+			<td>
+				25
+			</td>
+			<td>
+				In general, this should be less than distDetect.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				sidestepDist
+			</td>
+			<td class="Rows1">
+				(numbers)
+			</td>
+			<td class="Rows1">
+				10
+			</td>
+			<td class="Rows1">
+				In general, this should be less than distDetect.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				paceDist
+			</td>
+			<td>
+				(numbers)
+			</td>
+			<td>
+				6
+			</td>
+			<td>
+				Can be set to zero.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				Weapon
+			</td>
+			<td class="Rows1">
+				(weapon datablock names), "-noweapon", "-random"
+			</td>
+			<td class="Rows1">
+				"Ryder"
+			</td>
+			<td class="Rows1">
+				Multiple weapons can be separated by spaces.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				respawn
+			</td>
+			<td>
+				"true", "false"
+			</td>
+			<td>
+				"true"
+			</td>
+			<td>
+				This is a bool value.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				behavior
+			</td>
+			<td class="Rows1">
+				(behavior object names)
+			</td>
+			<td class="Rows1">
+				"ChaseBehavior"
+			</td>
+			<td class="Rows1">
+				Can only be properly setup behaviors.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				minRange
+			</td>
+			<td>
+				(numbers)
+			</td>
+			<td>
+				0
+			</td>
+			<td>
+				Can be set to zero. <i>Must</i> be less than sidestep and maxRange.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				npcAction
+			</td>
+			<td class="Rows1">
+				(numbers)
+			</td>
+			<td class="Rows1">
+				(none)
+			</td>
+			<td class="Rows1">
+				Has no overall default. Can be set to zero.
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Variable Name
+			</th>
+			<th>
+				Accepted Values
+			</th>
+			<th>
+				Default Value
+			</th>
+			<th>
+				Notes on Values
+			</th>
+		</tr>
+		<tr>
+			<td>
+				spawnGroup
+			</td>
+			<td>
+				(numbers)
+			</td>
+			<td>
+				1
+			</td>
+			<td>
+				Can be set to zero.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				cycleCounter
+			</td>
+			<td class="Rows1">
+				(numbers), "X"
+			</td>
+			<td class="Rows1">
+				5
+			</td>
+			<td class="Rows1">
+				Multiple values can be separated by spaces. "X" will get a random value when used.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				weaponMode
+			</td>
+			<td>
+				"Pattern", "Random", "Range", "Best"
+			</td>
+			<td>
+				"Pattern"
+			</td>
+			<td>
+				Can only be the words listed.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				activeDodge
+			</td>
+			<td class="Rows1">
+				(numbers), "X"
+			</td>
+			<td class="Rows1">
+				1
+			</td>
+			<td class="Rows1">
+				Set to zero to disable. "X" will get a random value when used.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				team
+			</td>
+			<td>
+				(numbers)
+			</td>
+			<td>
+				2
+			</td>
+			<td>
+				By default, all players are put on team 1 and all bots are on team 2. You should not skip any numbers.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				block
+			</td>
+			<td class="Rows1">
+				(player datablocks), "-random"
+			</td>
+			<td class="Rows1">
+				"DefaultPlayer"
+			</td>
+			<td class="Rows1">
+				Cannot be set per datablock. When using "-random" a spawnGroup must be on the marker.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				pathname
+			</td>
+			<td>
+				(path names)
+			</td>
+			<td>
+				(none)
+			</td>
+			<td>
+				Cannot be set per datablock. Has no overall default.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				leash
+			</td>
+			<td class="Rows1">
+				(numbers)
+			</td>
+			<td class="Rows1">
+				35
+			</td>
+			<td class="Rows1">
+				In general, this should be about the same as distDetect.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				realName
+			</td>
+			<td>
+				(text string)
+			</td>
+			<td>
+				"Bot"
+			</td>
+			<td>
+				Can be multiple words. It can also be set as just a space, which can be useful in T3D to show the bot's health without a name.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				countRespawn
+			</td>
+			<td class="Rows1">
+				(numbers), "X"
+			</td>
+			<td class="Rows1">
+				0
+			</td>
+			<td class="Rows1">
+				Use 0 for infinite respawning. Use "X" for a random number of respawns.
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Variable Name
+			</th>
+			<th>
+				Accepted Values
+			</th>
+			<th>
+				Default Value
+			</th>
+			<th>
+				Notes on Values
+			</th>
+		</tr>
+		<tr>
+			<td>
+				advancedDodge
+			</td>
+			<td>
+				"Random", "Side", "Back", "Serpentine"
+			</td>
+			<td>
+				"Random"
+			</td>
+			<td>
+				Can only be the words listed.
+			</td>
+		</tr>
+	</table>
+	<a name="Instruction9"></a>
+	<h2>
+		Weapon Datablock Values Table:</h2>
+	<h3>
+		These values are set per weapon datablock. Words in parenthesis such as (numbers), are the type of data that can be used as a
+		value; words in quotes are the exact words that can be used. All variables have an overall default. Check <a href="Usage_Instructions.html#Instruction40"
+			target="_top">here</a> for a description of each variable.
+	</h3>
+	<table class="Values1">
+		<tr>
+			<th>
+				Variable Name
+			</th>
+			<th>
+				Accepted Values
+			</th>
+			<th>
+				Default Value
+			</th>
+			<th>
+				Notes on Values
+			</th>
+		</tr>
+		<tr>
+			<td>
+				ignoreDistance
+			</td>
+			<td>
+				(numbers)
+			</td>
+			<td>
+				50
+			</td>
+			<td>
+				This should be the same as or more than maxRange.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				usesAmmo
+			</td>
+			<td class="Rows1">
+				"true", "false"
+			</td>
+			<td class="Rows1">
+				"true"
+			</td>
+			<td class="Rows1">
+				This is a bool value.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				fireDelay
+			</td>
+			<td>
+				(numbers)
+			</td>
+			<td>
+				1000
+			</td>
+			<td>
+				In milliseconds. 1000 is 1 second.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				triggerDown
+			</td>
+			<td class="Rows1">
+				(numbers)
+			</td>
+			<td class="Rows1">
+				50
+			</td>
+			<td class="Rows1">
+				In milliseconds. 1000 is 1 second.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				minIgnoreDistance
+			</td>
+			<td>
+				(numbers)
+			</td>
+			<td>
+				0
+			</td>
+			<td>
+				Can be set to zero. <i>Must</i> be less than ignoreDistance and maxRange.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				weapRating
+			</td>
+			<td class="Rows1">
+				(numbers)
+			</td>
+			<td class="Rows1">
+				5
+			</td>
+			<td class="Rows1">
+				If two or more weapons have to same quality rating, this can lead to minor errors for bots that are in "Best" mode.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				weapStartAmmo
+			</td>
+			<td>
+				(numbers)
+			</td>
+			<td>
+				10
+			</td>
+			<td>
+				The weapon has to be set to use ammo.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				notAim
+			</td>
+			<td class="Rows1">
+				"true", "false"
+			</td>
+			<td class="Rows1">
+				"false"
+			</td>
+			<td class="Rows1">
+				This is a bool value.
+			</td>
+		</tr>
+	</table>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Instruction30"></a>
+	<h1>
+		Traits:</h1>
+	<h3>
+		If you plan on just using a stock version of The UAISK, then the traits system isn't very noteworthy. However if you intend to
+		make extensive modifications to the AI or add in new behaviors, then the trait system can give you a lot more flexibility and
+		freedom then you would have otherwise, as well as simplifying the code change you need to make.<br>
+		<br>
+		Traits are values given to a behavior that represent the properties of that behavior. Most of the stock traits are bool (true/false)
+		values. The value of any of a behavior's traits can be changed dynamically and it will instantly change for all bots using that
+		behavior.<br>
+		<br>
+		The following is a list of each stock trait with a description of what that trait does.<br>
+	</h3>
+	<table class="Values1">
+		<tr>
+			<th>
+				Name
+			</th>
+			<th>
+				Description of what it does
+			</th>
+		</tr>
+		<tr>
+			<td>
+				isAggressive
+			</td>
+			<td>
+				Sets if the bot attacks or not. If the bot is not set to attack, it will have access to the NPC Actions system. <a class="Details1"
+					href="Usage_Instructions.html#Instruction10" target="_top">Check here for more details.</a>
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				canMove
+			</td>
+			<td class="Rows1">
+				Sets if the bot is able to move at all.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				returnToMarker
+			</td>
+			<td>
+				Sets if the bot should return to its marker or path after killing or losing track of its target.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				isKillable
+			</td>
+			<td class="Rows1">
+				Sets both if the bot can be killed and if other bots can target it.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				isFollowPlayer
+			</td>
+			<td>
+				Puts the bot on the player's team and has it follow the player.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				isLeashed
+			</td>
+			<td class="Rows1">
+				Sets if the bot can move away from a certain object. The object is set by the <i>leashedTo</i> trait.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				leashedTo
+			</td>
+			<td>
+				This trait is only used if the behavior is leashed. This trait is not a bool value.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				isSkittish
+			</td>
+			<td class="Rows1">
+				Sets the bot to run away when touched and is able to move farther from its spawn marker while pacing.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				doesAssist
+			</td>
+			<td>
+				Sets whether or not the bot should come to the aid of nearby team member when that team member gets hurt. <a class="Details1"
+					href="Usage_Instructions.html#Instruction32" target="_top">Check here for more details.</a>
+			</td>
+		</tr>
+	</table>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Instruction10"></a>
+	<h1>
+		Behaviors:</h1>
+	<h3>
+		Here is a list of the stock behaviors that come with The UAISK, as well as a brief description of how each one differs in the
+		way it acts.
+	</h3>
+	<a name="Instruction11"></a>
+	<h2>
+		Aggressive Bots:</h2>
+	<h3>
+		All aggressive bot behaviors target, attack, and move in the same way. Here I'm only noting the major differences between them.<br>
+		<br>
+		<b>"ChaseBehavior":</b> After the bot has lost sight of or killed its target, the bot will stay around the area where it last
+		saw its target alive. This is the default behavior.<br>
+		<br>
+		<b>"GuardBehavior":</b> After the bot has lost sight of or killed its target, the bot will attempt to go back to its spawn marker
+		or path.<br>
+		<br>
+		<b>"TurretBehavior":</b> This is for stationary attackers. The bot will not move from its original spawn location, but will turn
+		around on that spot.<br>
+		<br>
+		<b>"LeashedBehavior":</b> The bot can't move farther than a certain amount from its spawn marker. The bot always returns to its
+		spawn point like in "guard" behavior.<br>
+		<br>
+		<b>"TeammateBehavior":</b> When not in combat, the bot will try to go back to a player on its team. If there are no players on
+		the bot's current team, the bot will switch teams. Bots do not need to use the "teammate" behavior to be on the same team as
+		players and other bots.<br>
+		<br>
+		<b>"PetBehavior":</b> This behavior acts in much the same way as the "teammate" behavior. The difference is that instead of just
+		following the player around, the bot is actually leashed to the player; meaning that it can never be more than a certain distance
+		away from the player.<br>
+	</h3>
+	<a name="Instruction12"></a>
+	<h2>
+		Non-Aggressive Bots:</h2>
+	<h3>
+		These are non-aggressive bot behaviors which can have scripted actions (such as dialogue and changing which behavior they're
+		using). While in these behaviors, bots will not attack anything at all.<br>
+		<br>
+		<b>"NPCBehavior":</b> The bot cannot be killed.<br>
+		<br>
+		<b>"KillableNPCBehavior":</b> The bot can be killed.<br>
+		<br>
+		<b>"EscortBehavior":</b> The bot can be killed and will follow the player around.<br>
+		<br>
+		<b>"CritterBehavior":</b> The bot can be killed and runs from the player when touched. It can also pace far away from its marker.<br>
+		<br>
+		<b>"MedicBehavior":</b> The bot can be killed and will assist the player. It will then return back to its marker after it is
+		done with its scripted action.<br>
+		<br>
+		When the player is within the bot's detect range, an event can happen (such as text popping up). Going outside of the bots detect
+		range will make the pop-up close. The stock capabilities of this conversation system are fairly limited because <b>this kit's focus
+			is AI, not dialogue</b>. All editing and additions are done through script. Please review the comments in <i>aiNPC.cs</i>
+		to see how this system works. Note: This system was made for a game with only around a dozen lines of dialog. If you're making
+		a RPG with significant amounts of dialog; this system may need to be changed. More than one non-aggressive bot in an area can
+		cause text issues.<br>
+		<br>
+		To change what action a non-aggressive bot does when a player gets within its range, change the bot's <i>npcAction</i> setting
+		to a different number. Listed below are the three default examples that come with The UAISK. As-is, they don't do much, but they
+		should provide enough of an example to allow you to script what you would actually like to do.<br>
+		<br>
+	</h3>
+	<ul class="List1">
+		<li><i>npcAction = 1;</i> When in range, you will get a dialogue box asking if you wish to fight or not. If so, the bot will switch
+			from a non-aggressive behavior to the "Chase" behavior and will begin attacking you.</li>
+		<li><i>npcAction = 2;</i> A dialogue box pop up and three rounds of ammo will be added to the player's inventory.</li>
+		<li><i>npcAction = 3;</i> This shows a simple cycle of text with yes/no options.</li>
+		<li><i>npcAction = 4;</i> Displays a textbox and then heals the player back to full health. Only displays once you're in range of
+			their weapon and if you have taken damage already.</li>
+	</ul>
+	<h3>
+		<a href="Usage_Instructions.html#Instruction22" target="_top">For pathed behaviors, check here.</a><br>
+	</h3>
+	<a name="Instruction33"></a>
+	<h2>
+		Creating and Modifying Behaviors:</h2>
+	<h3>
+		There are a variety of reasons why you may want to create new behaviors or modify existing ones. You may want different bots
+		to have slightly different trait combinations than the stock version, you might want to have a few special bots that change their
+		traits during the course of your game, or you may want to make a completely new, custom trait and use that trait in different
+		combinations. But whatever your reasons might be, here's how you do it.<br>
+		<br>
+		To change what traits a behavior has, simply change the value of that trait within the correct behavior in the file <i>aiBehaviors.cs</i>.
+		Of course that will change the way in which every bot that's using that behavior reacts. If you only want certain bots to react
+		differently, you'll need to create a new behavior and set those bots to use the new behavior. To create a new behavior, simply
+		copy and paste a behavior which you would like to use as a base, then change the new behavior's name and set the values you would
+		like it to have for each trait.<br>
+		<br>
+		<a href="Usage_Instructions.html#Instruction30" target="_top">To learn about behavioral traits, check here.</a>
+	</h3>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Instruction13"></a>
+	<h1>
+		Application Programming Interface (API):</h1>
+	<h3>
+		This section contains script commands that may be used by you (the developer) to perform a wide variety of different actions.
+		These commands are for use in conjunction with your own custom code, so some experience with TorqueScript may be necessary to
+		perform certain tasks with these commands.
+	</h3>
+	<a name="Instruction14"></a>
+	<h2>
+		Spawning and Killing Bots:</h2>
+	<h3>
+		Spawning and killing is done by either the bot's spawn group or team number.</h3>
+	<pre>
+AIPlayer::actionByGroup(%spawnGroup, %action);
+AIPlayer::actionByTeam(%team, %action);
+</pre>
+	<h3>
+		If the group or team is set to "all" then everything will spawn.</h3>
+	<pre>
+//Spawn all groups
+AIPlayer::actionByGroup("all", "spawn");
+//Spawn all teams
+AIPlayer::actionByTeam("all", "spawn");
+</pre>
+	<h3>
+		The "spawn" action always forces a new bot to spawn from each marker in the selected group, team or "all". This includes markers
+		that already have bots associated with them. However, spawning two or more bots from the same marker can cause minor issues;
+		such as causing some of the other actions to not work properly. Because of this, it is recommended that you use the action "unspawned"
+		instead whenever possible, unless you specifically want more than one bot to spawn from the same marker for a particular purpose.<br>
+		<br>
+		You can also "delete" bots by group, team or "all". "Delete" both deletes the bot and stops it from respawning again.</h3>
+	<pre>
+//Delete group 1
+AIPlayer::actionByGroup(1, "delete");
+//Delete team 2
+AIPlayer::actionByTeam(2, "delete");
+</pre>
+	<h3>
+		You can "kill" bots by group, team or "all". "Kill" will cause the bot to die, playing a death animation, but it is able to respawn
+		because of this.</h3>
+	<pre>
+//Kill group 1
+AIPlayer::actionByGroup(1, "kill");
+//Kill team 2
+AIPlayer::actionByTeam(2, "kill");
+</pre>
+	<h3>
+		"Stop" will stop all selected bots from respawning but will not immediately kill them; they must die naturally.</h3>
+	<pre>
+//Stop all groups
+AIPlayer::actionByGroup("all", "stop");
+//Stop team 3
+AIPlayer::actionByTeam(3, "stop");
+</pre>
+	<h3>
+		The action "unspawned" will spawn bots at all markers from that team/group that don't currently have a bot spawned from them.
+		This includes bots that were killed using the "kill" action.</h3>
+	<pre>
+//Spawn all bots
+AIPlayer::actionByGroup("all", "unspawned");
+//Spawn all bots in team 1
+AIPlayer::actionByTeam(1, "unspawned");
+</pre>
+	<h3>
+		You can use the "inactive" get rid of all bots not currently engaged in combat. All idle bots in that group or team will be deleted
+		and have their respawning stopped. However, bots that are actively engaged in combat will remain unaffected.</h3>
+	<pre>
+//Delete group 1
+AIPlayer::actionByGroup(1, "inactive");
+//Delete all inactive bots
+AIPlayer::actionByTeam("all", "inactive");
+</pre>
+	<h3>
+		The stock version of the kit's installation includes a "spawn all by group" action on mission load. This action can be commented
+		out or deleted if you do not want that to occur.<br>
+		<br>
+		The actions are: <i>"spawn", "delete", "kill", "stop", "unspawned", "inactive"</i><br>
+		And they can each be done by group, team, or "all".
+	</h3>
+	<a name="Instruction15"></a>
+	<h2>
+		Spawning at Objects:</h2>
+	<h3>
+		To spawn a bot using the same position and rotation as another object, instead of just using premade spawn markers, use the follow:
+	</h3>
+	<pre>
+AIPlayer::spawnAtObject(%obj, %block, %delete, %path);
+</pre>
+	<h3>
+		Where <i>%obj</i> is the ID number or name of the object you'd like the bot to spawn at, <i>%block</i> is the datablock you would
+		like the new bot to use, <i>%delete</i> is a bool (true/false) value that represents whether or not you would like to delete
+		the spawn marker after the bot has been spawned, and <i>%path</i> is the name of a path you would like the newly spawned bot
+		to follow, if any. Other than the <i>%obj</i> value, all other values are optional. The object that you use will be deleted to
+		make sure that the new bot does not occupy the same space as that object.<br>
+		<br>
+		The <i>%delete</i> value is useful if you don't want the newly made marker/bot to be saved. However, the marker will not be deleted
+		if the bot that it spawns is set to use a feature which requires a marker, even if you request for the marker to be deleted.
+		Note that if the marker is deleted, any <a href="Usage_Instructions.html#Instruction14" target="_top">spawning and killing actions</a>
+		you attempt to use on the bot will not work properly, and some <a href="Usage_Instructions.html#Instruction12" target="_top">NPC
+			actions</a> may not reset.<br>
+		<br>
+		The main purpose for this is to be able to replace one bot with another, because another bot can be used as the spawn object,
+		but it can be used with any other object as well.<br>
+		<br>
+		Markers made this way that are not set to <i>%delete</i> will be saved when the mission is saved. Because you cannot add per
+		marker variables to bots spawned this way, other than the <i>%path</i> value, make sure the datablock and/or default variables
+		are set to the way you want the bot to behave.
+	</h3>
+	<a name="Instruction31"></a>
+	<h2>
+		Spawning at a Position:</h2>
+	<h3>
+		Much like spawning at an object, to spawn a bot at a specific position, use the follow:
+	</h3>
+	<pre>
+AIPlayer::spawnAtPosition(%pos, %block, %delete, %path);
+</pre>
+	<h3>
+		Where <i>%pos</i> is the position in world space you'd like the bot to spawn at, and <i>%block</i>, <i>%delete</i>, and <i>%path</i>
+		work in the same way as they do for the <a href="Usage_Instructions.html#Instruction15" target="_top"><i>spawnAtObject</i> command</a>.
+		Other than the <i>%pos</i> value, all other values are optional. The value for <i>%pos</i> can be either a position or a transform,
+		if you would like to set the bot's starting rotation as well. The <i>%delete</i> value has the same limitations as when using
+		the <a href="Usage_Instructions.html#Instruction15" target="_top"><i>spawnAtObject</i> command</a>.<br>
+		<br>
+		A few examples of what this can be used for include spawning a bot near the player (see the <a href="./Pet_Tutorial.html">Pet Tutorial</a>
+		for an example) or spawning a bot at a random location. The <i>spawnAtPosition</i> command has the same limitations in regards
+		to saving and pre-marker variables as the <a href="Usage_Instructions.html#Instruction15" target="_top"><i>spawnAtObject</i> command</a>
+		does.
+	</h3>
+	<a name="Instruction16"></a>
+	<h2>
+		Triggers and Items:</h2>
+	<h3>
+		The spawning and killing system allows for quite a bit of variation. Three of the many possible ways of using it are to have
+		bots spawn on mission load (which is part of the default installation), have bots spawn using a trigger, and to have bots spawn
+		using an item.<br>
+		<br>
+		A bit of setup is needed to spawn by a trigger (but the coding is already done for you). First, you have to place a triggerObject
+		down. You can name it whatever you want, but you have to specify two variables:<br>
+		<i>dataBlock = "guardTrigger";</i><br>
+		<i>spawnGroup = (number);</i><br>
+		<br>
+		The trigger's datablock can be selected as you make the trigger from within the world editor. You should specify a spawnGroup
+		for each trigger, and then add a matching spawnGroup parameter on each marker or datablock that you want to spawn from that trigger.
+		Once that's done, comment out or change the group in the line of script: <i>AIPlayer::actionByGroup("all", "spawn");</i> in the
+		function <i>startGame()</i> in the file <i>gameCore.cs</i>.<br>
+		<br>
+		By default The Universal AI Starter Kit does not allow you to spawn from an item. But here's an example of an item that will
+		spawn group 1 when picked up; this is made for T3D 1.2.0:<br>
+	</h3>
+	<pre>
+datablock StaticShapeData(AITriggerItem1)
+{
+    category = "AITriggers";
+    //Change what shape is used
+    shapeFile = "art/shapes/items/patch/healthpatch.dts";
+};
+
+function AITriggerItem1::onCollision(%this, %obj, %col)
+{
+    //Make sure a player picked up the item
+    if (%col.getClassName() $= "Player" && %col.getState() !$= "Dead")
+    {
+        //Delete the item
+        %obj.delete();
+        //You can change the group number or what action occurs in the next line
+        AIPlayer::actionByGroup(1, "unspawned");
+    }
+}
+</pre>
+	<a name="Instruction17"></a>
+	<h2>
+		Changing Teams and Spawn Groups:</h2>
+	<h3>
+		There can be an almost limitless number of total spawn groups, teams and members of each team and group. The team system also
+		allows players and bots to be in any combination on any team. Team members can switch teams at any point in time without reloading
+		or respawning. To change a bot or player's team after they have been spawned, use:</h3>
+	<pre>changeTeams(%obj, %team);</pre>
+	<h3>
+		Where <i>%obj</i> is the bot or player whose team you'd like to change, and <i>%team</i> is the number of the team you'd like
+		them to join. This can be used to join an existing team, or start a new team. For bots, this will both change the team of both
+		the bot and its marker's team at the same time, to allow you to do an <i>actionByTeam</i> based on the bot's new team number.<br>
+		<br>
+		To switch a marker's spawn group, use the function:</h3>
+	<pre>changeSpawnGroups(%obj, %spawnGroup);</pre>
+	<h3>
+		In <i>changeSpawnGroups()</i> the <i>%obj</i> variable is the marker and not the bot like it is with <i>changeTeams()</i>, and
+		<i>%spawnGroup</i> is the number of the group you would like the marker to be apart of.<br>
+		<br>
+		Neither of these functions permanently change the marker's group or team. If you save and reload your mission after using these
+		functions, the markers will still be apart of their original team or group. These functions are for a temporary change within
+		a single mission.
+	</h3>
+	<a name="Instruction34"></a>
+	<h2>
+		Special Moves:</h2>
+	<pre>AIPlayer::doSpecialMove(%obj, %time);</pre>
+	<h3>
+		The above function is used if you want the bot to stop all normal, automated tasks and just do one specific task that you tell
+		it to do. The <i>%obj</i> variable is the bot that you'd like to effect, and the <i>%time</i> variable is the duration the special
+		move will last, given in milliseconds. The function can also be called using:
+	</h3>
+	<pre>%obj.doSpecialMove(%time);</pre>
+	<h3>
+		An example of when this might be useful is if a bot was pushed or fell down somehow. You probably wouldn't want that bot to continue
+		moving and firing their weapon as they're trying to get back up. So you would use this special move function during the duration
+		that their "getting up" animation is playing to get them to stop those other tasks. Then after the given time has pasted, the
+		bot will begin acting normally again.<br>
+		<br>
+		When a new special move is set, it will override the time on the previous special move. This can be used to have the bot start
+		thinking sooner, or to keep it inert for a longer period of time.<br>
+		<br>
+		One thing to note is that you have to actually script the rest of the special move yourself. This is an advanced feature that
+		is mainly for use by knowledgeable scripters and coders. For more about character animation scripting, <a href="Usage_Instructions.html#Instruction36"
+			target="_top">check here</a>.
+	</h3>
+	<a name="Instruction41"></a>
+	<h2>
+		Explicit Movement:</h2>
+	<h3>
+		The explicit movement feature allows you to tell a specific bot to move to a specific location. However, this script feature
+		will not work correctly under all circumstances because The UAISK's navigation system was not specifically designed for movement
+		destinations to be set manually by players or developers.<br>
+		<br>
+		While the bots should have little trouble getting around one obstacle, if there are two or more obstacles between them and their
+		destination; they might have a harder time. A harder time could mean getting completely lost, or just moving in a very long,
+		suboptimal manner. Also the farther the distance, the less optimal their path will likely be; but in some cases, farther distances
+		can help the bot to navigate around large or multiple obstacles.<br>
+		<br>
+		It is recommended that you use this type of explicit movement as little as possible in your game, and if at all possible, use
+		waypoint based paths instead. Explicit movement should only be used for movement that is highly dynamic (such as being randomized)
+		or highly dependant on the player's input (such as controlling the AI via mouse input). For movement to predetermined points
+		and times (such as a scripted event), a waypoint based path should be used. And of course, normal movement for average situations
+		should be controlled by the kit's premade automated systems, rather than set manually.<br>
+		<br>
+		The syntax for explicit movement is as follows:
+	</h3>
+	<pre>%obj.explicitAIMovement(%position);</pre>
+	<h3>
+		Where <i>%obj</i> is the name or ID of a bot and <i>%position</i> is the world coordinates for the location you would like that
+		bot to move to. If the bot in question has a valid target, that bot will continue to go after that target rather than start moving
+		to the specified position. Here is an example of this script's usage:
+	</h3>
+	<pre>allBotsGroup.getObject(0).explicitAIMovement(LocalClientConnection.player.getPosition());</pre>
+	<h3>
+		In the script above, <i>allBotsGroup.getObject(0)</i> is the first or only active bot that has been spawned, and <i>LocalClientConnection.player.getPosition()</i>
+		is the player's position, assuming this game is hosted locally.
+	</h3>
+	<a name="Instruction42"></a>
+	<h2>
+		Start on Path:</h2>
+	<h3>
+		This command will force a bot to begin moving along a path.
+	</h3>
+	<pre>%obj.startOnPath(%path);</pre>
+	<h3>
+		Where <i>%obj</i> is the name or ID of a bot and <i>%path</i> is the name or ID of a path. If the bot in question has a valid
+		target, that bot will continue to go after that target rather than to start moving along the specified path. If the bot is already
+		moving along a path, this command can be used to make the bot begin to move along a different path. One possible use for this
+		command is to make bots that enter a certain trigger start moving along a specific path, or even different or randomized paths.
+	</h3>
+	<a name="Instruction37"></a>
+	<h2>
+		Path Alteration Scripting:</h2>
+	<h3>
+		For any number of reasons, there may come a time when you'd like to change a path in your game while the game is running. Here
+		are a few functions that can be called from any custom script you create to help you do that.<br>
+		<br>
+		If you would like to reverse the direction which bots travel along a path, you can do so using the following command.
+	</h3>
+	<pre>
+reversePathOrder(%path);
+</pre>
+	<h3>
+		Where <i>%path</i> is the ID number or name of the path whose direction you would like to invert.<br>
+		<br>
+		However, reversing the path's direction while a bot is using the path can sometimes cause the bot to skip nodes; depending on
+		where the bot is along the path when the reverse happens. But at other times, the direction inversion will occur without issue.<br>
+		<br>
+		If you would like to move the whole path at once by a certain amount, you can do so using the following command.
+	</h3>
+	<pre>
+moveWholePath(%path, %offset);
+</pre>
+	<h3>
+		Where <i>%offset</i> is the amount you would like each axis of the path's position to change by. And of course if you'd like
+		to change the position of just one node, you can use the stock Torque command:
+	</h3>
+	<pre>
+%node.setPosition(%pos);
+</pre>
+	<h3>
+		Where <i>%node</i> is the ID number or name of the node whose position you would like to change, and <i>%pos</i> is the new position
+		you would like it to be located at.<br>
+		<br>
+		If you would like to change the scale of a path, you can do so using the following command.
+	</h3>
+	<pre>
+rescalePath(%path, %scale);
+</pre>
+	<h3>
+		Where <i>%scale</i> is the percentage you would like each axis to be rescaled by.<br>
+		<br>
+		For more information about these features, check the <a href="Usage_Instructions.html#Instruction35" target="_top">Path Management</a>
+		section below.
+	</h3>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Instruction18"></a>
+	<h1>
+		Characters:</h1>
+	<a name="Instruction38"></a>
+	<h2>
+		Adding New Characters:</h2>
+	<h3>
+		To be able to use different player datablocks or characters, a few things need to be setup properly. First, the model has to
+		exist with all the necessary <i>.dts</i> and <i>.dsq</i> files. Second the new character needs to have a definition script; e.g.
+		<i>player.cs</i> or <i>adam.cs</i>. Next that definition file must be called in <i>onServerCreated()</i> in
+		<i>datablockExec.cs</i>. The example character that comes with the kit, and the recommend way to
+		setup your character, is to use the player as a base. If you do this, a definition file doesn't need to be created because <i>player.cs</i>
+		already exists. See the <a href="Usage_Instructions.html#Instruction29" target="_top">FAQs section</a> if you need further help
+		with basic character setup.<br>
+		<br>
+		Open <i>aiDatablocks.cs</i> and copy and paste all of the follow so that you have two of each of them (of course copy/paste the
+		whole datablock and not just the name):
+	</h3>
+	<pre>
+datablock PlayerData(DefaultPlayer : AIPlayerDataHolder)
+</pre>
+	<h3>
+		In the datablock name above you'll see that it has "DefaultPlayer" somewhere in the name. Change the word "DefaultPlayer" to
+		another name that represents the new bot that you want to make. The name doesn't really matter as long as it doesn't have any
+		spaces or weird punctuation marks.<br>
+		<br>
+		In the new version of "datablock PlayerData()" that you just made, change the <i>shapeFile</i> to point to the dts file you'd
+		like to use. You can also change the value of any other <a href="Usage_Instructions.html#Instruction8" target="_top">per datablock
+			variables</a> as needed; but none are required. Now simply set your datablock's name as the value of the <i>block</i> variable
+		on your <i>AIPlayerMarker</i> and spawn the bot.<br>
+		<br>
+		In your new datablock you may notice that it uses a pattern like <i>datablock PlayerData(UniqueName : AIPlayerDataHolder)</i>. The
+		<i>AIPlayerDataHolder</i> is a parent datablock that the new AI datablock inherits some of its settings from. By default the kit uses the
+		player's datablock as the parent, but it could use another datablock or none at all if you give the AI datablock all of the needed
+		settings; although changing the parent datablock is not recommended.
+	</h3>
+	<a name="Instruction36"></a>
+	<h2>
+		Character Animations:</h2>
+	<h3>
+		The Universal AI Starter Kit isn't directly involved with character animations, and in fact it is even abstracted from Torque's
+		animation system. While keeping that in mind, at some point you will likely want one of your characters to perform a non-stock
+		animation. If said character is AI controlled, you may have to add a bit of custom, animation related code to The UAISK. Because
+		animations involve stock Torque features, custom coding, and a moderate amount of programming knowledge, but have little to do
+		with The UAISK directly; these instructions will not go into the full details.<br>
+		<br>
+		However here are a few key, animation related script commands that are present in the stock version of Torque; just to help you
+		get started.</h3>
+	<pre>
+%obj.playThread(%threadNum, %sequenceName);
+%obj.stopThread(%threadNum);
+%obj.pauseThread(%threadNum);
+%obj.setThreadDir(%threadNum, %direction);
+%obj.setActionThread(%sequenceName, %hold, %fps);
+</pre>
+	<h3>
+		An animation thread defines what animation is playing at any given time based on the animation's priority and what type of animation
+		it is. Animation threads can have a thread number of between 0 and 3, with 0 being the highest priority. Types of animations
+		can include full body, lower body only, and blend animations. The sequence name is the name of the animation. Some stock Torque
+		sequence names include "root", "run", "death1", and "jump".<br>
+		<br>
+		If you are interesting in adding non-stock animations to your AI characters, you should also check out the <a href="Usage_Instructions.html#Instruction34"
+			target="_top">Special Moves</a> section.<br>
+		<br>
+		For more information about these and other stock Torque features, consult <a href="http://www.garagegames.com/documentation/torque-3d" target="_blank">
+			the official documentation</a> for the version of Torque you are using, or try <a href="http://www.garagegames.com/community/search"
+				target="_blank">searching</a> for those terms within the GarageGames site.
+	</h3>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Instruction19"></a>
+	<h1>
+		Weapons:</h1>
+	<a name="Instruction20"></a>
+	<h2>
+		Using Multiple Weapons:</h2>
+	<h3>
+		When allowing a bot to use multiple weapons, the first thing you have to do is set which weapons can be used. You can do this
+		by using the <a href="Usage_Instructions.html#Instruction23" target="_top">AI Marker Editor</a> or by manually setting the <i>Weapon</i>
+		variable. When setting the variable <i>Weapon</i> manually, separate each weapon's name with a space:</h3>
+	<pre>
+Weapon = "weapon1 weapon2 -noweapon -random";
+</pre>
+	<h3>
+		The values <i>"-noweapon"</i> and <i>"-random"</i> can be used in addition to weapons' names. The value <i>"-noweapon"</i> will
+		set the bot to not use a weapon, and <i>"-random"</i> will select a random weapon from any valid weapon datablock that is in
+		your game. The same weapon can be added to the <i>Weapon</i> variable multiple times. The AI system does not have a limit for
+		the total number of weapons a bot can use.<br>
+		<br>
+		The variable <i>cycleCounter</i> determines how often the bot changes, or tries to change, weapons; it can also have multiple
+		values separated by spaces. If a value is set to <i>"X"</i>, it will be replaced with a random number each time that value needs
+		to be used.
+	</h3>
+	<pre>
+cycleCounter = "2 1 X";
+</pre>
+	<h3>
+		The variable <i>cycleCounter</i> can hold an almost unlimited amount of different numbers in any mode. But, in general, <i>"Pattern"</i>
+		mode is the only <i>weaponMode</i> that should need more than one number.<br>
+		<br>
+		Before equipping any new weapons, the bot always checks if its target is within the weapon's range (both min and max), and if
+		it has ammo for that weapon; no matter what <i>weaponMode</i> the bot is set to. Currently there is no way for a bot to purposefully
+		pick up new weapons and ammo. Because of this, it's recommended that you leave <i>$AISK_ENDLESS_AMMO</i> set to true, which will
+		bypass checking the bot's inventory for the weapon's ammo. However if the bot happens to accidently collect a new weapon, the
+		new weapon will be added to the end of the bot's weapon variable. If the bot has more than one weapon and its target is out of
+		range of its current weapon, it will try to switch to a different weapon.<br>
+		<br>
+		The different <i>weaponMode</i> values are as follows:<br>
+		<br>
+		<b>"Pattern":</b> Goes in the order the weapons are in, starting over once the last weapon is used, or was attempted to be used.
+		The <i>cycleCounter</i> goes in order, but starts over once the bot uses the last cycle or when the weapons are started over.
+		If a weapon is skipped, then its corresponding <i>cycleCounter</i> value is also skipped (so that the pattern is always the same).<br>
+		<br>
+		<b>"Best":</b> The bot always tries to use the weapon that has the highest <i>weapRating</i> of the weapons on its list. The
+		weapons are sorted by the function <i>sortBestWeapons(%shape)</i> whenever a new weapon is acquired. In <i>sortBestWeapons(%shape)</i>,
+		<i>%shape</i> should be the bot. The <i>cycleCounter</i> always goes in order, only starting over once the last cycle is used.<br>
+		<br>
+		<b>"Range":</b> The bot always uses the weapon with the lowest range that is still within range of its target (both min and max
+		ranges). If more than one weapon has the exact same range, it will use the latter one in its <i>Weapon</i> variable. The <i>cycleCounter</i>
+		always goes in order, only starting over once the last cycle is used.<br>
+		<br>
+		<b>"Random":</b> The bot uses a random weapon from its <i>Weapon</i> variable. The <i>cycleCounter</i> always goes in order,
+		only starting over once the last cycle is used.<br>
+		<br>
+	</h3>
+	<a name="Instruction21"></a>
+	<h2>
+		Adding New Weapons:</h2>
+	<h3>
+		To be able to use new weapons, first your weapon needs to be setup properly:
+	</h3>
+	<ul class="List1">
+		<li>The model has to exist.</li>
+		<li>Script has to be made to handle the weapon; e.g. <i>crossbow.cs</i>, <i>SwarmGun.cs</i>, or <i>rocketLauncher.cs</i>.</li>
+		<li>And that script must be called in <i>onServerCreated()</i> in <i>datablockExec.cs</i>.</li>
+	</ul>
+	<h3>
+		See the <a href="Usage_Instructions.html#Instruction29" target="_top">FAQs section</a> if you need further help with basic weapons
+		setup. Once you have your weapon working in general (test it using the normal, default player if needed), you need to make it
+		work with The Universal AI Starter Kit. Set any <a href="Usage_Instructions.html#Instruction9" target="_top">AI specific per weapon
+			datablock variables</a> that you wish to set; but none are required. Then simply set your weapon's name as the value of the
+		<i>Weapon</i> variable on your marker or datablock and spawn the bot.
+	</h3>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Instruction32"></a>
+	<h1>
+		Assisting:</h1>
+	<h3>
+		When a player or bot takes damage or dies, nearby team member bots can react if their behavior is set to assist. They will move
+		to the injured's location and look around quickly. Bots will come to assist only if they are within the correct distance and
+		can get to the location of their injured team member. You need to have both the behavior trait and the global variable set to
+		the appropriate value, depending on how you would like each bot to react; as well as having the bot on the correct team of course.
+		To increase the performance of your game, it is recommended that you have the minimum number of bots possible use this feature.<br>
+		<br>
+		The global variable <i>$AISK_CAN_ASSIST</i> is located in the file <i>aiGlobals.cs</i> and can be set to the following values:<br>
+		1 = Bots can only assist players or bots following the player that get injured.<br>
+		2 = Bots can only assist other bots that are injured.<br>
+		3 = Bots can assist all players and bots that get injured. This is the default value.<br>
+		All other values, such as 0, will completely disable assisting.
+	</h3>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Instruction22"></a>
+	<h1>
+		Paths:</h1>
+	<h3>
+		If you wish to have a bot follow a path, first you have to place a path with nodes in your mission and give the path a name.
+		Set the value of the bot's <i>pathname</i> parameter to correspond to the name of that path that you want the bot to move along.
+		If you wish for the bot to be unpathed, don't add any value to <i>pathname</i> variable and the bot will default to being unpathed.<br>
+		<br>
+		A new path can either be created manually or by using the <a href="Usage_Instructions.html#Instruction26" target="_top">AI Marker
+			Editor</a>. To create a path manually (which is not the recommended way), consult the instruction manual for the version
+		of Torque that you are using.<br>
+		<br>
+		If a path is not set to loop, then the bot will stop at the final node on that path. This feature, when used with trigger or
+		item based spawning, can allow you to create scripted events (of course, you'll have to script said events yourself). If a path
+		is set to loop, the bot will keep circling it until another action comes up (such as spotting a target). Make sure your paths
+		have the <i>isLoop</i> variable set to what you want.<br>
+		<br>
+		The "Pause Time" field in the AI Marker Editor's Path Editor sets how long the bot will pause at that node. The value should
+		be given in milliseconds. If you're not using the AIME path editor, the variable that sets the minimum time will be called <i>msToNext</i>.
+		If you do not want the bot to stop when moving along its path, set the value of this to 0.<br>
+		<br>
+		For behaviors with the "returnToMarker" trait, the bot will attempt to return to its path after it has lost sight of or killed
+		its target. For behaviors without the "returnToMarker" trait, the bot will stay in the area where it last saw its target. Non-moving
+		or player following behaviors (such as turret, pet, teammate and escort) cannot be pathed at all.<br>
+		<br>
+		For more about paths, check the <a href="Usage_Instructions.html#Instruction42" target="_top">API section</a>.
+	</h3>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Instruction23"></a>
+	<h1>
+		AI Marker Editor:</h1>
+	<a name="Instruction24"></a>
+	<h2>
+		AIME Overview:</h2>
+	<h3>
+		All AI bots are spawned based on an <i>AIPlayerMarker</i> (which is usually just called a marker). The marker is an object that
+		is used as a placeholder for all of the bot's settings. These settings are applied to the bot when it is spawned. To help aid
+		you when creating and adjusting these markers, The UAISK includes an editor called the AI Marker Editor (AIME).<br>
+		<br>
+		Press "<b>Alt A</b>" to open the editor. You can also add the AI Marker Editor to the "Edit" drop down menu in the world editor
+		by doing the "Optional Custom Install Instructions" for the version of Torque you are using. For a video tutorial about using
+		the AI Marker Editor, <a href="http://vimeo.com/7226158" target="_blank">click here</a> (Note: This video tutorial is now partially
+		out of date). Also be sure to read the text and tooltips that are in the editor itself.<br>
+		<br>
+		The default AI Marker Editor should look similar to the following image.<br>
+	</h3>
+	<img border="0" hspace="0" alt="AIME Top" src="AIME_Top.png" width="344" height="114"><br>
+	<br>
+	<ol class="List2">
+		<li>Title: At the top of the editor you'll see that it says "AI Marker Editor - " then the name of the page you are currently on.</li>
+		<li>Page Selector: From the page selector you can set what information you would like the editor to display. Detailed descriptions
+			of each page are <a href="Usage_Instructions.html#Instruction26" target="_top">below</a>.</li>
+		<li>Deselect Textbox: If you have selected a textbox to type in a value, you will be unable to move using the keyboard and will type
+			instead. You can unselect the textbox using this button. After it is no longer selected, you are free to move your character
+			or camera around again using the keyboard.</li>
+		<li>Marker Selector: From here you can select which marker you would like to edit from a list of all previously created makers in
+			the mission. When you select a marker with the AIME, it will also show up selected in the world editor if the world editor is
+			open. When you select a marker, you'll see all of its values in the editor until you apply, or select a different marker. If
+			the marker doesn't have a value on it, the editor will show the datablock's value; if the datablock also doesn't have a value,
+			the editor will show the overall default value (which is exactly how values are determined when a bot is spawned).</li>
+	</ol>
+	<h3>
+		Number 4 is only shown on the four marker editing pages; which are Positioning, General, Distances, and Weapons. However, the
+		Path Management and Path Editing pages have a similar GUI element for selecting paths.
+	</h3>
+	<a name="Instruction25"></a>
+	<h2>
+		AIME Object Creation:</h2>
+	<h3>
+		Marker, path and node creation and deletion can only be done from the "Creation" page. All other pages are only used for editing
+		these existing objects or for supplemental tasks.<br>
+		<br>
+		<b>"New - From Selected":</b> When pressed, a brand new marker will be created. The new marker will be a clone of the currently
+		selected marker, but it will be given a different name and placed using your current position and rotation. The existing marker
+		that you wish to use as a base can be selected from the dropdown menu to the right of this button.<br>
+		<br>
+		<b>"New - Use Defaults":</b> When pressed, a brand new marker will be created. The new marker will be placed using your current
+		position and rotation. The settings that are first used on this new marker will be from the selected datablock's values or the
+		global default values, depending on which you have set. The datablock whose defaults you would like to use can be selected from
+		the dropdown menu to the right of this button.<br>
+		<br>
+		<b>"Delete Selected Marker":</b> When pressed, the currently selected marker will be permanently deleted.<br>
+		<br>
+		<b>"New Path":</b> When pressed, will create a new path. A path can be selected from the dropdown menu to the right of this button.<br>
+		<br>
+		<b>"New Node":</b> When pressed, will create a new node on the currently selected path. This node will be placed at your current
+		position. A node can be selected from the dropdown menu to the right of this button.<br>
+		<br>
+		<b>"Delete Selected Path":</b> When pressed, the currently selected path will be permanently deleted.<br>
+		<br>
+		<b>"Delete Selected Node":</b> When pressed, the currently selected node will be permanently deleted.<br>
+		<br>
+		To prevent accidents, the "delete" buttons can be disabled from a <a href="Usage_Instructions.html#Instruction28" target="_top">global
+			variable</a> at the top of <i>AIMarkerEditor.cs</i>.
+	</h3>
+	<a name="Instruction35"></a>
+	<h2>
+		Path Management:</h2>
+	<h3>
+		The tools on the "Path Management" page of the editor allow you to manage a path as just one object instead of having to make
+		separate changes to each individual node that makes up that path. Changing individual node and path properties can be done from
+		the "Path Editing" page.<br>
+		<br>
+		The "Clone Path" button will copy the path and apply the given offset to the new copy. Cloning makes a new copy of the path with
+		copies of each node and uses the same properties for the nodes and path, plus an optional offset to each node's position. "Move
+		Path" applies a given offset to each node on the selected path without making a new copy.<br>
+		<br>
+		The "Scale Path" feature allows all 3 axes to be scaled independently. Values are given as a percentage. The values can be positive
+		to make the path larger, or negative to make it smaller. Zero can also be used to not have an axis scale. Values of less than
+		-100 will flip the path inside out; because it's making the path more than 100% smaller; and -100 exactly will make the path
+		into a dot.<br>
+		<br>
+		Scale can be given as just 1 value to have the path scale evenly in all directions. Given as 2 values, the path will scale on
+		the X and Y axes only; or given as all 3 values for separate X, Y, and Z scaling.<br>
+		<br>
+		You can use the "Flip Path" button to turn over a path along its X, Y, Z or All axes.<br>
+		<br>
+		The "Merge Paths" button will take all the nodes from the selected path and add them to the end of a second selected path; and
+		will then delete the first path which is now node-less. The second path is the one that is selected from the dropdown menu to
+		the left of this button. <span class="Warn1">Warning:</span> Using the "Merge Paths" feature while the mission editor is open
+		can cause your game to crash.<br>
+		<br>
+		The "Split Path" button will take all nodes after the given amount and move them from the original path onto a newly created
+		path.<br>
+		<br>
+		The "Reverse Path" button inverts the order the nodes are in along the path. This will cause any bots to move in the opposite
+		direction when traveling along the path.<br>
+		<br>
+		When open, the mission editor does not update the nodes' visual positions properly when using these commands. You may need to
+		close and reopen the mission editor to see the nodes' correctly updated positions.
+	</h3>
+	<a name="Instruction26"></a>
+	<h2>
+		AIME Pages:</h2>
+	<h3>
+		The AI Marker Editor has 10 pages. They are: Creation, Positioning, General, Distances, Weapons, Path Management, Path Editing,
+		Actions, Globals, and Search
+		<br>
+		If you don't see the setting you're looking for on one page, try another. Check the editor's text and tooltips for help with
+		any specific variables, or you can <a href="Usage_Instructions.html#Instruction8" target="_top">check here</a>.<br>
+		<br>
+		<b>&bull; Creation</b><br>
+		Create and delete markers, paths and nodes. Further details can be found in the <a href="Usage_Instructions.html#Instruction25"
+			target="_top">AIME Object Creation</a> section above.<br>
+		<br>
+		<b>&bull; Positioning</b><br>
+		When editing or creating markers; try to place them exactly on the ground/floor or as close to the ground/floor as possible without
+		going under it. This can be done using the "Get Position" button in the editor. When the "Get Position" button is pressed it
+		will change the marker's position to the current position of the player or camera; depending on which one you are using at the
+		time. When you push the "Get Rotation" button, it will do the same as the "Get Position" button, only with rotation instead of
+		position. The "Get Both" button will get both the player's/camera's rotation and position and set it to the marker once the changes
+		are applied. Changing the scale of the marker will change the scale of the bot that is spawned from it. When making new markers
+		on the "Creation" page, a "Get Both" is done automatically before the marker is made.<br>
+		<br>
+		<b>&bull; General</b><br>
+		On this page you can find a wide variety of non-distance related variables and settings. The text towards the bottom of the page
+		displays the ID number of the bot that is associated with the currently selected marker.<br>
+		<br>
+		<b>&bull; Distances</b><br>
+		On this page you can change the various distance settings that the bot will use to navigate and attack when in your game. The
+		distances are generally in order from longest to shortest.<br>
+		<br>
+		<b>&bull; Weapons</b><br>
+		This page allows you to change the weapons that the bot will use and the way in which it will use them. If you select a weapon
+		from the "Available Weapons" list, it will be added to the "Current Weapons" list. The "Current Weapons" list is what gets placed
+		on the marker when you apply. You can click a weapon on the "Current Weapons" list to delete that weapon from that list. For
+		more about weapons, <a href="Usage_Instructions.html#Instruction19" target="_top">check here</a>.<br>
+		<br>
+		<b>&bull; Path Management</b><br>
+		From this page you can change the attributes of each node on an entire path at one time. Attributes that can be changed include
+		scale, position, and direction. Further details can be found in the <a href="Usage_Instructions.html#Instruction35" target="_top">
+			Path Management</a> section above.<br>
+		<br>
+		<b>&bull; Path Editing</b><br>
+		On this page you can edit the properties of paths and nodes that have already been created. The top portion of the paths page
+		is for paths, the bottom section is for nodes on the selected path. When the "Get Position" button is pressed it will change
+		the nodes position to the current position of the player or camera; depending on which one you are using at the time. Use the
+		appropriate apply button for the object you are trying to edit. For more about paths, <a href="Usage_Instructions.html#Instruction22"
+			target="_top">check here</a>.<br>
+		<br>
+		<b>&bull; Actions</b><br>
+		On this page you can perform a variety of actions that will help you as a developer.<br>
+		<br>
+		It is important to give markers a unique name when creating new ones. Unnamed markers will automatically be named "MarkerXX",
+		with XX being their number based on order of creation. However, if for some reason the markers' order gets mixed up, you can
+		use the "Rename Markers" button to reorder them again. Giving each marker a unique name both avoids some minor issues and helps
+		you when editing. Likewise the "Rename Paths" button will automatically name all of your paths as "PathXX" and the waypoint nodes
+		on your paths as "NodeXX", with "XX" being there number in order.<br>
+		<br>
+		The "Hide Markers" selector will allow you to hide or show all markers as needed while editing. The "Display Name As" dropdown
+		allows you to select if or how you would like the bot's name to be shown. <a href="Usage_Instructions.html#Instruction14" target="_top">
+			Check here</a> for instructions on using the other actions that are on the bottom section of this page.<br>
+		<br>
+		Note: For some of the "Display Name As" options to work, you must have a <i>GuiShapeNameHud</i> enabled in your <i>playGui</i>.
+		By default, <i>GuiShapeNameHud</i> is enabled.<br>
+		<br>
+		<b>&bull; Globals</b><br>
+		On this page you can temporarily change the value of the global AI variables. No changes you make to the value of the global
+		variables will be saved; this feature is only to help you when testing different settings. To permanently save a value you like,
+		you must change the value of that variable in the file <i>aiGlobals.cs</i>. <a href="Usage_Instructions.html#Instruction28" target="_top">
+			Check here</a> or <i>aiGlobals.cs</i> for more information about different global variables.<br>
+		<br>
+		<b>&bull; Search</b><br>
+		Search for markers that contain certain values for certain variables. This can be helpful for levels with large amounts of markers
+		with diverse settings. Global/overall values do not count in the results, however datablock based values do. The search is not
+		case sensitive and will not get partial matches.<br>
+		<br>
+		You can select the variable you would like to be search through, the operation that should be used to search, and the key word
+		or number that should be looked for. After the search button is pressed, it will tell you the number of results and list all
+		markers that match your search. You can then select a marker from that list to have it selected throughout the rest of the AIME.
+		The search results will still be displayed even if the editor is closed and reopened.<br>
+	</h3>
+	<a name="Instruction27"></a>
+	<h2>
+		AIME Bottom Buttons:</h2>
+	<h3>
+		After you have made all changes you wish to make to a single marker, use the "Apply Edits" button to apply the changes. You can
+		switch pages (but not markers) before you apply and any values that you have changed will be correctly saved when you apply.
+		You need to apply changes once per marker. When applying, the editor adds as little information as possible to the marker itself.
+		If you are setting a marker to have the same value for a variable as the datablock's or default's value, the marker's value will
+		be set to blank. This allows you to change the datablock's value or the default value without having to edit all of your markers
+		to see the result.<br>
+		<br>
+		The "Apply + Respawn" button will apply your changes to that marker; and then it will delete and respawn the entire spawn group
+		of the marker you were editing. This allows you to see the changes you've made without having to reload the mission.<br>
+		<br>
+		"Apply Edits" and "Apply + Respawn" are only shown on the four marker editing pages; which are Positioning, General, Distances,
+		and Weapons.<br>
+		<br>
+		The "Save Mission" button will save the mission whether or not anything has been changed; and it does not have a "save as" option,
+		it will only do a normal save. <span class="Warn1">Note:</span> Because the AIME's "Save Mission" button helps to preserve your
+		AI settings, it is recommended that you always use it whenever any bots have been spawned in your mission; even if you have only
+		made non-AI related changes to your mission elements since the last time you saved.<br>
+		<br>
+		The "Spawn" button only appears at the bottom of the "Creation" page. When pressed, all unspawned bots will spawn.
+	</h3>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Instruction28"></a>
+	<h1>
+		Other Variables:</h1>
+	<h3>
+		Here's a brief description of some of the variables that can <b>only</b> be set globally; from the file <i>aiGlobals.cs</i> or
+		from any script which you might make. This isn't every global variable, just the most interesting ones. Check <i>aiGlobals.cs</i>
+		for more variables. For the values of these variables, follow the <a href="Usage_Instructions.html#Instruction7" target="_top">general
+			rules</a>.<br>
+		<br>
+	</h3>
+	<table class="Values1">
+		<tr>
+			<th>
+				Name
+			</th>
+			<th>
+				Description of what it does
+			</th>
+		</tr>
+		<tr>
+			<td>
+				$AISK_MARKER_HIDE
+			</td>
+			<td>
+				Turns marker hiding on or off, useful when editing missions.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				$AISK_ENHANCED_FOV_CHANCE
+			</td>
+			<td class="Rows1">
+				There is a 1 in (this variable's value) chance that the bot will gain 360 degree vision to prevent it from being snuck up on.
+				Can be set to 0 to disable.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				$AISK_ENHANCED_FOV_TIME
+			</td>
+			<td>
+				How long the bots field of vision is enhanced to 360 for.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				$AISK_ENHANCED_DEFENDING_TIME
+			</td>
+			<td class="Rows1">
+				How long the bot gets a 360 FOV and a longer detect distance for after being sniped.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				$AISK_ENHANCED_DEFENDING_DISTANCE
+			</td>
+			<td>
+				Detect distance is multiplied by this number after a bot has been sniped.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				$AISK_ATTENTION_RANGE
+			</td>
+			<td class="Rows1">
+				The detect distance is multiplied by this number to get the distance from the player at which the bot will start to pay less
+				attention. This can greatly affect performance.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				$AISK_HEALTH_IGNORE
+			</td>
+			<td>
+				Bots go for the target with the least health, unless two or more targets have health within this amount of one another, then
+				they go for the closest target. If you set this number really high, bots will always just go for the closest target; if set very
+				low (including 0), bots will always go for the target with the lowest health.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				$AISK_FREE_FOR_ALL
+			</td>
+			<td class="Rows1">
+				If set to true, every bot will try to attack every other bot, regardless of their team.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				$AISK_RAND_CYCLE_MAX
+			</td>
+			<td>
+				If the bot's weapon cycle counter is set to "x" it will get a random number between 1 and this value each time it is needed.
+				<a class="Details1" href="Usage_Instructions.html#Instruction20" target="_top">Check here for more details.</a>
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				$AISK_RESPAWN_DELAY
+			</td>
+			<td class="Rows1">
+				Determines how long a bot waits in between dying and respawning again.
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Name
+			</th>
+			<th>
+				Description of what it does
+			</th>
+		</tr>
+		<tr>
+			<td>
+				$AISK_FRIENDLY_FIRE
+			</td>
+			<td>
+				Sets if team members can hurt each other, this only includes the bots taking damage, including from hitting themselves.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				$AISK_SHOW_NAME
+			</td>
+			<td class="Rows1">
+				Sets what a bot's real name should be displayed as. This can be set to "Show", "DontShow" or "Debug". When set to "Debug", warnings
+				are sent to the console when certain potential errors occur.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				$AISK_ASSIST_DISTANCE
+			</td>
+			<td>
+				This variable's value times a bot's detect distance is how far away a bot can assist from.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				$AISK_CAN_ASSIST
+			</td>
+			<td class="Rows1">
+				Sets which bots, if any, can assist bots and players on their team. <a class="Details1" href="Usage_Instructions.html#Instruction32"
+					target="_top">Check here for more details.</a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				$AISK_PATH_SPEED
+			</td>
+			<td>
+				The speed of the bot while on a path.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				$AISK_PACE_SPEED
+			</td>
+			<td class="Rows1">
+				The speed of the bot while pacing.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				$AISK_MIN_PACE
+			</td>
+			<td>
+				The minimum amount bots will pace away from their guard point.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				$AISK_PACE_TIME
+			</td>
+			<td class="Rows1">
+				How often the bots will move to a new pacing location. Randomized between 1 and this value each time.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				$AISK_CREATION_DELAY
+			</td>
+			<td>
+				How long the bots wait after spawning before they begin to think.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				$AISK_ENDLESS_AMMO
+			</td>
+			<td class="Rows1">
+				Gives the bots an unlimited supply of ammunition for their weapons.
+			</td>
+		</tr>
+		<tr>
+			<th>
+				Name
+			</th>
+			<th>
+				Description of what it does
+			</th>
+		</tr>
+		<tr>
+			<td>
+				$AISK_RAND_DODGE_MAX
+			</td>
+			<td>
+				If active dodge is set to "x" it will get a random number between 1 and this value each time it is needed.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				$AISK_RESPAWN_RANDOM
+			</td>
+			<td class="Rows1">
+				If the respawn count is set to "x" it will get a random number between 1 and this value on spawning the first time.
+			</td>
+		</tr>
+	</table>
+	<h3>
+		These are at the top of <i>AIMarkerEditor.cs</i>. These variables only change the way the AI Marker Editor (AIME) behaves during
+		the development of your game.<br>
+	</h3>
+	<table class="Values1">
+		<tr>
+			<th>
+				Name
+			</th>
+			<th>
+				Description of what it does
+			</th>
+		</tr>
+		<tr>
+			<td>
+				$AIME_DisableDeleteMode
+			</td>
+			<td>
+				Gets rid of the "delete" buttons in the editor to prevent accidents.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				$AIME_SelectNextMarker
+			</td>
+			<td class="Rows1">
+				Changes how the next marker is selected while editing a preexisting marker in the AIME.
+			</td>
+		</tr>
+		<tr>
+			<td>
+				$AIME_SpawnAfterSave
+			</td>
+			<td>
+				Sets whether or not to spawn all the bots after saving in the editor.
+			</td>
+		</tr>
+		<tr>
+			<td class="Rows1">
+				$AIME_ResetOnCharacterChange
+			</td>
+			<td class="Rows1">
+				Resets (or not) a marker's values when the datablock it's using is changed.
+			</td>
+		</tr>
+	</table>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Instruction29"></a>
+	<h1>
+		FAQs:</h1>
+	<h3>
+		<b>Q: Something isn't working right, what should I do?</b>
+		<br>
+		<b>A:</b> First make sure all files are executing and/or compiling properly. Then check the console log for errors. Then try
+		reinstalling the kit again from scratch. I and many other people have successfully installed and used this kit based on my instructions.
+		So your problem is likely caused by one of two things- you're trying to do a custom, non-default install; or you didn't follow
+		the instructions properly. If you're not doing a custom install, please try carefully redoing all of the instructions multiple
+		times before asking for help. The solution to your problem is most likely in the instructions and it's probably faster and easier
+		for you to do so than to wait for a reply in the forum for help.<br>
+		<br>
+		If you still can't get something to work, be sure to be as detailed and clear as possible while asking for help (especially if
+		you're doing a non-default install). Your post should include:</h3>
+	<ul class="List1">
+		<li>The version of Torque you're using.</li>
+		<li>The version of The Universal AI Starter Kit you're using.</li>
+		<li>What other kits, add-ons, customizations or modifications your test environment has. This means literally any changes at all;
+			including free resources, kits you have purchased and custom coding that you have done yourself. This information is especially
+			important because most problems are caused by code changes that have been made to Torque or the kit itself. If you haven't changed
+			anything at all and are having installation problems, please use the quick install files that come with the kit.</li>
+		<li>As detailed of a description of the problem as possible. Post any console errors you're getting and give steps to reproduce the
+			issue if needed.</li>
+	</ul>
+	<h3>
+		Please read and follow the above when posting for help in the forum. If you don't give all of the information that's needed, people won't be able to help you.<br>
+		<br>
+		<b>Q: Why isn't my custom character model, animation or weapon working?</b>
+		<br>
+		<b>A:</b> Try using it as/with a normal, non-AI player. If it doesn't work properly as/with the default player; then the problem
+		has nothing to do with the AI, and it's just not setup correctly. If it does work as/with the default player, try carefully redoing
+		all of the related instructions multiple times before asking for specific help in the forum. Also try to have your new weapon
+		or character's code resemble the stock code as closely as possible; try using a default weapon or character's script as a base
+		for your own.<br>
+		<br>
+		Check the following links for general help with setting up a <a href="http://www.garagegames.com/products/torque-3d/fps/4-characters/1"
+			target="_blank">player</a> or <a href="http://www.garagegames.com/products/torque-3d/fps/5-weapons/1" target="_blank">weapon</a>.
+		If you are still unable to setup your player or weapon, do a <a href="http://www.garagegames.com/community/search" target="_blank">
+			search</a> to see how to set it up correctly.<br>
+		<br>
+		<b>Q: My game needs a feature that isn't part of the stock kit. How would I go about adding it?</b>
+		<br>
+		<b>A:</b> If you need a feature that isn't already in The UAISK, then you're going to have to program it yourself or find someone
+		else to help you, but that someone isn't me. As stated in the opening section of these instructions; the more unique you want
+		your AI to be, the more you'll have to do yourself. And you're not entitled to hours of unpaid custom programming
+		or technical support.<br>
+		<br>
+		The only AI files it is recommended you change are <i>aiGlobals.cs</i>, <i>aiDatablocks.cs</i>, <i>aiBehaviors.cs</i> and <i>aiNPC.cs</i>.
+		Changes to any other AI files are not supported and need to be done on your own as custom work.<br>
+		<br>
+		There are a lot of great resources on GarageGames.com and I highly suggest <a href="http://www.garagegames.com/community/search"
+			target="_blank">searching</a> through them to find what you are looking for. Most things that you'll think of have already
+		been thought of (or at least something similar) and there's a decent chance a good resource for it already exists, if you're
+		willing to do a bit of digging.<br>
+		<br>
+		<b>Q: Why isn't The UAISK working with this alpha/beta release of T3D?</b>
+		<br>
+		<b>A:</b> Alpha and beta versions of engines, by there very nature, are still changing, unstable, unpolished and likely lacking
+		documentation. Because of this, they are not officially supported by The Universal AI Starter Kit and updates will only be released
+		for new versions of T3D once they are stable and finalized. If you are unable to use the kit with an alpha or beta version of
+		T3D without getting assistance, then you probably shouldn't be using that version of T3D yet.<br>
+</body>
+</html>

@@ -1,0 +1,1178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html lang="en-US">
+<head>
+	<title>Team Tutorial</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+	<meta name="keywords" content="instructions, ai, starter, kit, team, tutorial">
+	<meta name="description" content="A tutorial about teams for The Universal AI Starter Kit.">
+	<link href="style.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<h1>
+		Table of Contents:</h1>
+	<a href="Team_Tutorial.html#Instruction1" target="_top">Introduction</a><br>
+	<a href="Team_Tutorial.html#Step1" target="_top">Part 1 - Step 1</a><br>
+	<a href="Team_Tutorial.html#Step2" target="_top">Part 1 - Step 2</a><br>
+	<a href="Team_Tutorial.html#Step3" target="_top">Part 1 - Step 3</a><br>
+	<a href="Team_Tutorial.html#Step4" target="_top">Part 1 - Step 4</a><br>
+	<a href="Team_Tutorial.html#Step5" target="_top">Part 1 - Step 5</a><br>
+	<a href="Team_Tutorial.html#Step6" target="_top">Part 1 - Step 6</a><br>
+	<a href="Team_Tutorial.html#Step7" target="_top">Part 1 - Step 7</a><br>
+	<a href="Team_Tutorial.html#Step8" target="_top">Part 2 - Step 8</a><br>
+	<a href="Team_Tutorial.html#Step9" target="_top">Part 2 - Step 9</a><br>
+	<a href="Team_Tutorial.html#Step10" target="_top">Part 3 - Step 10</a><br>
+	<a href="Team_Tutorial.html#Step11" target="_top">Part 3 - Step 11</a><br>
+	<a href="Team_Tutorial.html#Step12" target="_top">Part 4 - Step 12</a><br>
+	<a href="Team_Tutorial.html#Step13" target="_top">Part 4 - Step 13</a><br>
+	<a href="Team_Tutorial.html#Step14" target="_top">Part 4 - Step 14</a><br>
+	<a href="Team_Tutorial.html#Step15" target="_top">Part 4 - Step 15</a><br>
+	<a href="Team_Tutorial.html#Step16" target="_top">Part 4 - Step 16</a><br>
+	<a href="Team_Tutorial.html#Step17" target="_top">Part 4 - Step 17</a><br>
+	<a href="Team_Tutorial.html#Step18" target="_top">Part 5 - Step 18</a><br>
+	<a href="Team_Tutorial.html#Step19" target="_top">Part 5 - Step 19</a><br>
+	<a href="Team_Tutorial.html#Step20" target="_top">Part 5 - Step 20</a><br>
+	<a href="Team_Tutorial.html#Step21" target="_top">Part 5 - Step 21</a><br>
+	<a href="Team_Tutorial.html#Step22" target="_top">Part 5 - Step 22</a><br>
+	<a href="Team_Tutorial.html#Step23" target="_top">Part 6 - Step 23</a><br>
+	<a href="Team_Tutorial.html#Step24" target="_top">Part 6 - Step 24</a><br>
+	<a href="Team_Tutorial.html#Step25" target="_top">Part 6 - Step 25</a><br>
+	<a href="Team_Tutorial.html#Step26" target="_top">Part 6 - Step 26</a><br>
+	<a href="Team_Tutorial.html#Step27" target="_top">Part 7 - Step 27</a><br>
+	<a href="Team_Tutorial.html#Step28" target="_top">Part 8 - Step 28</a><br>
+	<a name="Instruction1"></a>
+	<br>
+	<h1>
+		Introduction:</h1>
+	<h3>
+		This is a tutorial that will help you to setup a scoring and respawn system using The UAISK's existing team system. Before starting
+		this tutorial, please make sure you have properly installed The Universal AI Starter Kit. If you have not done so yet, check
+		the installation instructions for the version of Torque you are using.<br>
+		<br>
+		Keep in mind that this is a tutorial; it is meant as a learning tool and thus does not always do everything in the best, most
+		efficient manner. This tutorial is for <i>T3D 1.2.0</i> only and would require numerous adjustments if you
+		wish to get it to work in older versions.<br>
+		<br>
+		This tutorial is more advanced and less complete than the <a href="./Pet_Tutorial.html">Pet Tutorial</a>. This tutorial is meant
+		for users with programming experience. If you have not already tried the Pet Tutorial,
+		I would recommend starting out with it first. If you have already completed the Pet Tutorial, I recommend
+		removing it prior to beginning the Team Tutorial as the two are not compatible with one another.<br>
+		<br>
+		If you're only interested in part of this tutorial, you don't have to do the whole thing. Each feature that is added is given
+		its own "Part". Some of the earlier parts are required so that later features can be added, but some of the later parts can be
+		skipped if you are not interested in the feature they add.
+	</h3>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Step1"></a>
+	<h2>
+		Part 1 - Step 1:</h2>
+	<h3>
+		Backup all files that are going to be changed. They are:<br>
+		<br>
+		<i>art/gui/defaultGameProfiles.cs<br>
+			core/scripts/server/spawn.cs<br>
+			scripts/client/config.cs<br>
+			scripts/client/default.bind.cs<br>
+			scripts/client/init.cs<br>
+			scripts/client/playerList.cs<br>
+			scripts/client/serverConnection.cs<br>
+			scripts/server/commands.cs<br>
+			scripts/server/game.cs<br>
+			scripts/server/gameCore.cs<br>
+			scripts/server/player.cs<br>
+			scripts/server/UAISK/aiGroups.cs<br>
+			scripts/server/UAISK/aiLoading.cs<br>
+			scripts/server/UAISK/aiSpawning.cs<br>
+		</i>
+	</h3>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step2"></a>
+	<h2>
+		Part 1 - Step 2:</h2>
+	<h3>
+		In part 1 we will be adding in the team selection GUI, a key binding to open it, and a message that will be sent when leaving
+		or joining a team.<br>
+		<br>
+		File- scripts/client/init.cs<br>
+		Under:<br>
+	</h3>
+	<pre>
+   exec("art/gui/controlsHelpDlg.gui");
+</pre>
+	<h3>
+		Add:<br>
+	</h3>
+	<pre>
+   //UAISK Team: Start
+   //Execute the team selection GUI file
+   exec("art/gui/TeamSelectDlg.gui");
+   //UAISK Team: End
+</pre>
+	<h3>
+		This will execute the new GUI file that we will add later. You may notice the start and end comments around the code, this is
+		so you can tell what code has been changed later. In any step, you can check the code comments for more information about the
+		code.
+	</h3>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step3"></a>
+	<h2>
+		Part 1 - Step 3:</h2>
+	<h3>
+		Now we'll add a key binding to open the GUI which we will make later. In addition to the key binding, there is another function
+		which the GUI will use. This function calls the server to change the player's team.<br>
+		<br>
+		File- scripts/client/default.bind.cs<br>
+		Add to the end of the file:<br>
+	</h3>
+	<pre>
+//UAISK Team: Start
+//Bind the team selection GUI to the "m" key
+moveMap.bindCmd(keyboard, "m", "Canvas.pushDialog(TeamSelectDlg);", "");
+
+function jointeam(%team)
+{
+    //Send a command to the server to join a new team
+    commandtoserver('JoinTeam', %team);
+    //Close the dialog once selection is made
+    Canvas.popDialog(TeamSelectDlg);
+}
+//UAISK Team: End
+</pre>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step4"></a>
+	<h2>
+		Part 1 - Step 4:</h2>
+	<h3>
+		Now delete the file: scripts/client/config.cs<br>
+		<br>
+		It will automatically be created again by T3D, with our new settings, once the game is run. If you're working from a new project
+		that's never been run before, the file config.cs will not exist yet.
+	</h3>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step5"></a>
+	<h2>
+		Part 1 - Step 5:</h2>
+	<h3>
+		We'll now add the server command that will be called by the function we added in an earlier step.<br>
+		<br>
+		File- scripts/server/commands.cs<br>
+		Add to the end of the file:<br>
+	</h3>
+	<pre>
+//UAISK Team: Start
+function serverCmdJoinTeam(%client, %team)
+{
+    //Switch the player's team
+    changeTeams(%client.player, %team);
+}
+//UAISK Team: End
+</pre>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step6"></a>
+	<h2>
+		Part 1 - Step 6:</h2>
+	<h3>
+		Now look in the "Tutorial_Files" folder of this kit. You should see a file called "TeamSelectDlg.gui".<br>
+		<br>
+		Add that file to: art/gui/TeamSelectDlg.gui<br>
+		<br>
+		Feel free to look inside of it to see how it works.
+	</h3>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step7"></a>
+	<h2>
+		Part 1 - Step 7:</h2>
+	<h3>
+		Now we'll add code to message all team members when a player switches teams; this will also update the player list.<br>
+		<br>
+		File- scripts/server/UAISK/aiGroups.cs<br>
+		Function- changeTeams()<br>
+		Find:<br>
+	</h3>
+	<pre>
+    //Change the marker's team too if this is a bot
+    if (%obj.getClassName() !$= "Player")
+        changeMarkerTeams(%obj.marker, %team);
+    //If it's a player, also change the client's team
+    else
+        %obj.getControllingClient().team = %team;
+</pre>
+	<h3>
+		And replace it with:<br>
+	</h3>
+	<pre>
+    //UAISK Team: Start
+    //Change the marker's team too if this is a bot
+    if (%obj.getClassName() !$= "Player")
+        changeMarkerTeams(%obj.marker, %team);
+    //If it's a player, also change the client's team
+    else
+    {
+        //Get the network client instead of the player object
+        %client = %obj.getControllingClient();
+
+        chatMessageTeam(%client, %client.team, '\c3%1 %2.', %client.playerName, "has left team " @ %client.team);
+
+        //Switch the client's team
+        %client.team = %team;
+
+        chatMessageTeam(%client, %client.team, '\c3%1 %2.', %client.playerName, "has joined team " @ %client.team);
+
+        //Update the player list
+        messageClient(%client, 'MsgClientJoin', "", %client.playerName, %client, %client.sendGuid, %client.score,
+            %client.kills, %client.deaths, %client.isAIControlled(), %client.isAdmin, %client.isSuperAdmin);
+
+        game.incScore( %client, 0, true);
+        game.incKills( %client, 0, true);
+        game.incDeaths(%client, 0, false);
+    }
+    //UAISK Team: End
+</pre>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Step8"></a>
+	<h2>
+		Part 2 - Step 8:</h2>
+	<h3>
+		Part one is now complete. After each part is finished (including the later parts), I'd recommend running your game to check for
+		errors. If there are any problems, its better to find them now than after you've done the whole tutorial. This will make it easier
+		to figure out where the mistake was made.<br>
+		<br>
+		In part 2 we will be adding code to automatically open the team selection GUI on load and open the player list when a game is
+		over. First we will add the code needed to open the team selection GUI on load.<br>
+		<br>
+		File- scripts/client/serverConnection.cs<br>
+		Function- GameConnection::initialControlSet()<br>
+		Find:<br>
+	</h3>
+	<pre>
+      if (Canvas.getContent() != PlayGui.getId())
+      {
+         Canvas.setContent(PlayGui);
+         ControlsHelpDlg.toggle();
+      }
+</pre>
+	<h3>
+		And replace it with:<br>
+	</h3>
+	<pre>
+      //UAISK Team: Start
+      if (Canvas.getContent() != PlayGui.getId())
+      {
+         Canvas.setContent(PlayGui);
+         //Open the team selection GUI on load
+         Canvas.pushDialog(TeamSelectDlg);
+      }
+      //UAISK Team: End
+</pre>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step9"></a>
+	<h2>
+		Part 2 - Step 9:</h2>
+	<h3>
+		Now we will make the player list display when the game ends.<br>
+		<br>
+		File- scripts/server/game.cs<br>
+		Function- cycleGame()<br>
+		Find:<br>
+	</h3>
+	<pre>
+   if (!$Game::Cycling)
+   {
+      $Game::Cycling = true;
+      $Game::Schedule = schedule(0, 0, "onCycleExec");
+   }
+</pre>
+	<h3>
+		And replace it with:<br>
+	</h3>
+	<pre>
+   if (!$Game::Cycling)
+   {
+      //UAISK Team: Start
+      //Display the player list when the game is ended
+      PlayerListGui.toggle();
+      //UAISK Team: End
+      $Game::Cycling = true;
+      $Game::Schedule = schedule(0, 0, "onCycleExec");
+   }
+</pre>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Step10"></a>
+	<h2>
+		Part 3 - Step 10:</h2>
+	<h3>
+		In part 3 we will be adding different colored text to the player list. The color is determined by what team the player is on.<br>
+		<br>
+		File- scripts/client/playerList.cs<br>
+		Function- PlayerListGui::update()<br>
+		Find:<br>
+	</h3>
+	<pre>
+   %text = StripMLControlChars(%name) SPC %tag TAB %score TAB %kills TAB %deaths;
+</pre>
+	<h3>
+		And replace it with:<br>
+	</h3>
+	<pre>
+   //UAISK Team: Start
+   //Get the out put color for our text, based on what team the play or bot is
+   switch(%clientId.team){
+      case 1: %color = "\c1";
+      case 2: %color = "\c2";
+      case 3: %color = "\c3";
+      case 4: %color = "\c4";
+      case 5: %color = "\c5";
+      case 6: %color = "\c6";
+      case 7: %color = "\c7";
+      case 8: %color = "\c8";
+      case 9: %color = "\c9";
+      default: %color = "\c1";
+   }
+
+   //Display the text in the player list
+   %text = %color @ StripMLControlChars(%name) SPC %tag TAB %score TAB %kills TAB %deaths;
+   //UAISK Team: End
+</pre>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step11"></a>
+	<h2>
+		Part 3 - Step 11:</h2>
+	<h3>
+		File- art/gui/defaultGameProfiles.cs<br>
+		Find:<br>
+	</h3>
+	<pre>
+singleton GuiControlProfile (HudTextNormalProfile)
+{
+   opaque = false;
+   fontType = "Arial";
+   fontSize = 14;
+   fontColor = "255 255 255";
+};
+</pre>
+	<h3>
+		And replace it with:<br>
+	</h3>
+	<pre>
+singleton GuiControlProfile (HudTextNormalProfile)
+{
+   opaque = false;
+   fontType = "Arial";
+   fontSize = 14;
+   fontColor = "255 255 255";
+   //UAISK Team: Start
+   //Add a different color for each team
+   fontColors[1] = "255 0 0";
+   fontColors[2] = "50 50 255";
+   //UAISK Team: End
+};
+</pre>
+	<h3>
+		You may notice that the code in the previous step allowed for up to nine different colors, whereas this code only has two colors.
+		You could add in more teams by adding other buttons (with a new team number) to the team selection GUI, adding more colors here,
+		and adding in an addition respawn point for each team (if you use that feature later).<br>
+		<br>
+		You can open the player list in a mission by pressing the "F2" key.
+	</h3>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Step12"></a>
+	<h2>
+		Part 4 - Step 12:</h2>
+	<h3>
+		In part 4 we will be adding team based spawn point for players.<br>
+		<br>
+		File- scripts/server/gameCore.cs<br>
+		Function- GameCore::preparePlayer()<br>
+		This function should currently look like:<br>
+	</h3>
+	<pre>
+function GameCore::preparePlayer(%game, %client)
+{
+   //echo (%game @"\c4 -> "@ %game.class @" -> GameCore::preparePlayer");
+
+   // Find a spawn point for the player
+   // This function currently relies on some helper functions defined in
+   // core/scripts/spawn.cs. For custom spawn behaviors one can either
+   // override the properties on the SpawnSphere's or directly override the
+   // functions themselves.
+   %playerSpawnPoint = pickPlayerSpawnPoint($Game::DefaultPlayerSpawnGroups);
+   // Spawn a camera for this client using the found %spawnPoint
+   //%client.spawnPlayer(%playerSpawnPoint);
+   %game.spawnPlayer(%client, %playerSpawnPoint);
+
+   // Starting equipment
+   %game.loadOut(%client.player);
+
+   //AISK Changes: Start
+   //Give the client and player a team
+   if (%client.team $= "")
+     %client.team = 1;
+
+   //Set the player's team based on the client's team
+   %client.player.team = %client.team;
+
+   //Put the player in a SimSet with its teammates
+   TeamSimSets(%client.player, %client.player.team);
+   //AISK Changes: End
+}
+</pre>
+	<h3>
+		Replace it with:<br>
+	</h3>
+	<pre>
+function GameCore::preparePlayer(%game, %client)
+{
+   //echo (%game @"\c4 -> "@ %game.class @" -> GameCore::preparePlayer");
+
+   //UAISK Team: Start
+   //Give the client a team
+   if (%client.team $= "")
+     %client.team = 1;
+
+   // Find a spawn point for the player
+   // This function currently relies on some helper functions defined in
+   // core/scripts/spawn.cs. For custom spawn behaviors one can either
+   // override the properties on the SpawnSphere's or directly override the
+   // functions themselves.
+   %playerSpawnPoint = pickPlayerSpawnPoint($Game::DefaultPlayerSpawnGroups, %client);
+   // Spawn a camera for this client using the found %spawnPoint
+   //%client.spawnPlayer(%playerSpawnPoint);
+   %game.spawnPlayer(%client, %playerSpawnPoint);
+
+   // Starting equipment
+   %game.loadOut(%client.player);
+
+   //Set the player's team based on the client's team
+   %client.player.team = %client.team;
+
+   //Put the player in a SimSet with its teammates
+   TeamSimSets(%client.player, %client.player.team);
+   //UAISK Team: End
+}
+</pre>
+	<h3>
+		This moves where the client's team is set to before the spawn point is picked. Then the client is sent to the spawn point selector
+		so that the point can be selected based on the client's team.
+	</h3>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step13"></a>
+	<h2>
+		Part 4 - Step 13:</h2>
+	<h3>
+		File- core/scripts/server/spawn.cs<br>
+		Function- pickPlayerSpawnPoint()<br>
+		Find:<br>
+	</h3>
+	<pre>
+function pickPlayerSpawnPoint(%spawnGroups)
+{
+   // Walk through the groups until we find a valid object
+   for (%i = 0; %i < getWordCount(%spawnGroups); %i++)
+   {
+      %group = getWord(%spawnGroups, %i);
+
+      if (isObject(%group))
+         %spawnPoint = %group.getRandom();
+
+      if (isObject(%spawnPoint))
+         return %spawnPoint;
+   }
+</pre>
+	<h3>
+		And replace it with:<br>
+	</h3>
+	<pre>
+//UAISK Team: Start
+//The client was passed to the function to see what team it's on
+function pickPlayerSpawnPoint(%spawnGroups, %client)
+{
+   //Get the name of the simset that this team's spawn points are in
+   %name = "SpawnSphereTeam" @ %client.team;
+
+   //Get a random spawn point in that simset
+   %spawnPoint = %name.getRandom();
+
+   if (isObject(%spawnPoint))
+      return %spawnPoint;
+//UAISK Team: End
+</pre>
+	<h3>
+		The above code will get a random spawn point for the player, based on what team they're on.
+	</h3>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step14"></a>
+	<h2>
+		Part 4 - Step 14:</h2>
+	<h3>
+		Now we have to group the spawn points on mission load. This will call a function to do that.<br>
+		<br>
+		File- scripts/server/UAISK/aiLoading.cs<br>
+		Function- getAllObjectsWanted()<br>
+		Find:<br>
+	</h3>
+	<pre>
+            //Other functions can be added here for other types of objects
+            //Put them inside an "else if" that checks the datablock or getClassName
+</pre>
+	<h3>
+		And replace it with:<br>
+	</h3>
+	<pre>
+            //UAISK Team: Start
+            //If this is a spawn point, call a function to see what team it's on
+            else if (%obj.dataBlock $= "SpawnSphereMarker")
+                groupSpawnSpheres(%obj);
+            //UAISK Team: End
+            //Other functions can be added here for other types of objects
+            //Put them inside an "else if" that checks the datablock or getClassName
+</pre>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step15"></a>
+	<h2>
+		Part 4 - Step 15:</h2>
+	<h3>
+		This function will put the spawn points into simsets based on what team they belong to.<br>
+		<br>
+		File- scripts/server/UAISK/aiLoading.cs<br>
+		Add the following to the end of the file:<br>
+	</h3>
+	<pre>
+//UAISK Team: Start
+//This function places all SpawnSphereMarkers in simsets by team
+function groupSpawnSpheres(%obj)
+{
+    //If the spawn point has no team, put it in team 1
+    if (%obj.team $= "")
+    {
+        //If there's no team 1 set, make it
+        if (!isObject(SpawnSphereTeam1))
+        {
+            new SimSet(SpawnSphereTeam1);
+            UaiskData.add(SpawnSphereTeam1);
+        }
+
+        //Add the marker to the team 1 set
+        SpawnSphereTeam1.add(%obj);
+    }
+    //If the spawn point does have a team, put it with that team
+    else
+    {
+        //Get the name that this team set should be
+        %name = "SpawnSphereTeam" @ %obj.team;
+
+        //Make a new simset if it isn't already made
+        if (!isObject(%name))
+        {
+            new SimSet(%name);
+            UaiskData.add(%name);
+        }
+
+        //Add the marker to the team simset
+        %name.add(%obj);
+    }
+}
+//UAISK Team: End
+</pre>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step16"></a>
+	<h2>
+		Part 4 - Step 16:</h2>
+	<h3>
+		When the player changes teams, we want them to be moved to a spawn point for their new team.<br>
+		<br>
+		File- scripts/server/UAISK/aiGroups.cs<br>
+		Function- changeTeams()<br>
+		Right after:<br>
+	</h3>
+	<pre>
+        game.incScore( %client, 0, true);
+        game.incKills( %client, 0, true);
+        game.incDeaths(%client, 0, false);
+</pre>
+	<h3>
+		Which was added by us earlier. Add:<br>
+	</h3>
+	<pre>
+        //Find a spawn point that's of the new team
+        %spawnPoint = pickPlayerSpawnPoint($Game::DefaultPlayerSpawnGroups, %client);
+        //Move the player to the spawn point of their new team
+        %obj.setTransform(%spawnPoint.getTransform());
+</pre>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step17"></a>
+	<h2>
+		Part 4 - Step 17:</h2>
+	<h3>
+		Now load a mission in T3D. Then press F11 to open the world editor. With the Object Editor selected, go to Library > Level >
+		Level and make a new "Player Drop Point". Then switch back to the "Scene" tab and select your new spawn point. At the bottom
+		of the "Inspector" window you will see a section for "Dynamic Fields". Click the plus sign to add a new dynamic field. Change
+		the text "dynamicField" to "team" and the text "defaultValue" to "2"; which will set your new spawn point to have a value of
+		team 2.<br>
+		<br>
+		You have now made a spawn point for players on the blue team (team 2). You can create as many spawn points as you'd like for
+		team 1 and team 2; or even add new teams (as described above) and make spawn point for them. If a team has more than one spawn
+		point, one is selected at random. You must save and then reload your mission before any of the new spawn points will work.<br>
+		<br>
+		Using the AI Marker Editor, you can also put a few markers next to the team spawn points, if you wish and haven't already done
+		so for testing the previous parts. Make sure to put the markers on the same team as the spawn point they're next to, but do not
+		set them to use the "teammate" or "pet" behavior. You may also want to name the bots, which may be helpful for the next part
+		of this tutorial. You can even setup paths going from each spawn area to another location, so that the two teams can meet in
+		combat elsewhere.
+	</h3>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Step18"></a>
+	<h2>
+		Part 5 - Step 18:</h2>
+	<h3>
+		In part 5 we will be adding the ability for the game to keep track of the bot's kills, deaths and scores. Do to this we have
+		to add a fake client (made from a script object) for each bot. If we tried to keep the kill and death data on the bots themselves,
+		that data would disappear every time the bot died.<br>
+		<br>
+		File- scripts/server/gameCore.cs<br>
+		Function- GameCore::preparePlayer()<br>
+		Find:<br>
+	</h3>
+	<pre>
+   //Set the player's team based on the client's team
+   %client.player.team = %client.team;
+
+   //Put the player in a SimSet with its teammates
+   TeamSimSets(%client.player, %client.player.team);
+</pre>
+	<h3>
+		And add the following after it:<br>
+	</h3>
+	<pre>
+   //Get the number of bots in the mission
+   %n = allBotsGroup.getCount();
+
+   //Cycle through all the bot's fake clients if it hasn't been done yet
+   if (%n + ClientGroup.getCount() > PlayerListGuiList.rowCount())
+   {
+      //When the player enters the game, add all bots to the player list and update their scores
+      for (%i = 0; %i < %n; %i++)
+      {
+         //Get the bot we're dealing with
+         %obj = allBotsGroup.getObject(%i);
+         //Get the fake client for this bot
+         %fakeClient = %obj.fakeClient;
+
+         //Add the bot's fake client to the player list
+         messageClient(%client, 'MsgClientJoin', "", %fakeClient.realName, %fakeClient, %fakeClient.sendGuid, %fakeClient.score,
+            %fakeClient.kills, %fakeClient.deaths, %fakeClient.isBot, %fakeClient.isAdmin, %fakeClient.isSuperAdmin);
+
+         //Update its scores
+         game.incScore( %fakeClient, 0, true);
+         game.incKills( %fakeClient, 0, true);
+         game.incDeaths(%fakeClient, 0, false);
+      }
+   }
+</pre>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step19"></a>
+	<h2>
+		Part 5 - Step 19:</h2>
+	<h3>
+		This will change the bots' scores as needed whenever a bot dies, or the player's score if they killed a bot.<br>
+		<br>
+		File- scripts/server/player.cs<br>
+		Function- Armor::damage()<br>
+		Find:<br>
+	</h3>
+	<pre>
+   // Deal with client callbacks here because we don't have this
+   // information in the onDamage or onDisable methods
+   %client = %obj.client;
+   %sourceClient = %sourceObject ? %sourceObject.client : 0;
+
+   //Have other bots assist the injured if needed
+   checkAboutAssisting(%obj);
+
+   if (%obj.getState() $= "Dead")
+   {
+      if (%obj.isbot == true)
+      {
+         %marker = %obj.marker;
+
+         //Check if the bots should still be respawning
+         if (%marker.respawnCount > 0)
+         {
+            if (%marker.respawnCounter <= 0)
+                %obj.respawn = false;
+
+            %marker.respawnCounter--;
+         }
+
+         //Respawn the bot if needed
+         if (%obj.respawn == true)
+         {
+            %marker.delayRespawn = schedule($AISK_RESPAWN_DELAY, %marker, "AIPlayer::spawn", %marker, true);
+            %this.player = 0;
+         }
+         else
+         {
+            %marker.botBelongsToMe = "";
+            %marker.respawnCount = "";
+            %marker.respawnCounter = "";
+         }
+      }
+</pre>
+	<h3>
+		And replace it with:<br>
+	</h3>
+	<pre>
+   // Deal with client callbacks here because we don't have this
+   // information in the onDamage or onDisable methods
+   %client = %obj.client;
+
+   //UAISK Team: Start
+   if (%sourceObject.isBot)
+      %sourceClient = %sourceObject.fakeClient;
+   else
+      %sourceClient = %sourceObject ? %sourceObject.client : 0;
+
+   //Have other bots assist the injured if needed
+   checkAboutAssisting(%obj);
+
+   if (%obj.getState() $= "Dead")
+   {
+      if (%obj.isbot == true)
+      {
+         %marker = %obj.marker;
+
+         //Check if the bots should still be respawning
+         if (%marker.respawnCount > 0)
+         {
+            if (%marker.respawnCounter <= 0)
+                %obj.respawn = false;
+
+            %marker.respawnCounter--;
+         }
+
+         //Give points to the player if needed
+         if (isObject(%sourceClient))
+         {
+            //Take away points instead if it was friendly fire
+            if (%sourceObject.team == %obj.team)
+               game.incScore(%sourceClient, -1, true);
+            else
+            {
+               game.incKills(%sourceClient, 1, true);
+               game.incScore(%sourceClient, 1, true);
+            }
+
+            //End the game if we should
+            if (%sourceClient.score >= $Game::EndGameScore)
+                cycleGame();
+         }
+
+         //The bot died so update its death total
+         game.incDeaths(%obj.fakeClient, 1, false);
+
+         //Respawn the bot if needed
+         if (%obj.respawn == true)
+         {
+            //Pass the fake client when the bot is respawned
+            %marker.delayRespawn = schedule($AISK_RESPAWN_DELAY, %marker, "AIPlayer::spawn", %marker, true, %obj.fakeClient);
+            %this.player = 0;
+         }
+         else
+         {
+            %marker.botBelongsToMe = "";
+            %marker.respawnCount = "";
+            %marker.respawnCounter = "";
+         }
+      }
+   //UAISK Team: End
+</pre>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step20"></a>
+	<h2>
+		Part 5 - Step 20:</h2>
+	<h3>
+		We have to pass the bot's fake client to the spawn function whenever a bot is respawned.<br>
+		<br>
+		File- scripts/server/UAISK/aiSpawning.cs<br>
+		Function- AIPlayer::spawn()<br>
+		Replace:<br>
+	</h3>
+	<pre>
+//This is the spawn function for the bot.
+function AIPlayer::spawn(%obj, %isRespawn)
+{
+</pre>
+	<h3>
+		With:<br>
+	</h3>
+	<pre>
+//This is the spawn function for the bot.
+//UAISK Team: Start
+//We pass the client on respawn to keep track of the bot it belongs to
+function AIPlayer::spawn(%obj, %isRespawn, %client)
+{
+//UAISK Team: End
+</pre>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step21"></a>
+	<h2>
+		Part 5 - Step 21:</h2>
+	<h3>
+		Set the bot's fake client value when as the bot is spawned.<br>
+		<br>
+		File- scripts/server/UAISK/aiSpawning.cs<br>
+		Function- AIPlayer::spawn()<br>
+		Replace:<br>
+	</h3>
+	<pre>
+       //Max range must be this number or higher
+       maxIgnore = 1;
+   };
+</pre>
+	<h3>
+		With:<br>
+	</h3>
+	<pre>
+       //Max range must be this number or higher
+       maxIgnore = 1;
+       //UAISK Team: Start
+       fakeClient = %client;
+       //UAISK Team: End
+   };
+</pre>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step22"></a>
+	<h2>
+		Part 5 - Step 22:</h2>
+	<h3>
+		If this is the first time the bot is spawning (meaning it didn't just die and respawn), we have to make a new script object to
+		function as the bot's fake client.<br>
+		<br>
+		File- scripts/server/UAISK/aiSpawning.cs<br>
+		Function- AIPlayer::spawn()<br>
+		Before:<br>
+	</h3>
+	<pre>
+    return %player;
+</pre>
+	<h3>
+		Add:<br>
+	</h3>
+	<pre>
+    //UAISK Team: Start
+    //Make a fake client for this bot if it doesn't already have one
+    if (!isObject(%player.fakeClient))
+    {
+        %fakeClient = new ScriptObject() {
+            realName = %player.realName;
+            team = %player.team;
+            kills = 0;
+            deaths = 0;
+            score = 0;
+            isBot = 1;
+        };
+
+        %player.fakeClient = %fakeClient;
+        UaiskData.add(%fakeClient);
+    }
+    //UAISK Team: End
+</pre>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Step23"></a>
+	<h2>
+		Part 6 - Step 23:</h2>
+	<h3>
+		In part 6 we will be adding a team based win condition. First we'll add a selector to the GUI to allow players to choose whether
+		team based scores or personal scores are used to decide when the game is over.<br>
+		<br>
+		File- art/gui/TeamSelectDlg.gui<br>
+		Find:<br>
+	</h3>
+	<pre>
+   };
+};
+//--- OBJECT WRITE END ---
+</pre>
+	<h3>
+		And before that, add:<br>
+	</h3>
+	<pre>
+      new GuiCheckBoxCtrl(Score_Selectioner) {
+         text = " Score by Team Total";
+         groupNum = "-1";
+         buttonType = "ToggleButton";
+         useMouseEvents = "0";
+         Profile = "GuiCheckBoxProfile";
+         HorizSizing = "right";
+         VertSizing = "bottom";
+         position = "197 155";
+         Extent = "86 25";
+         MinExtent = "8 8";
+         Visible = "1";
+         Variable = "$GoByTeamScores";
+      };
+</pre>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step24"></a>
+	<h2>
+		Part 6 - Step 24:</h2>
+	<h3>
+		See if the player wants to use individual or team based scores.<br>
+		<br>
+		File- scripts/server/gameCore.cs<br>
+		Function- GameCore::onDeath()<br>
+		Find:<br>
+	</h3>
+	<pre>
+      // If the game may be ended by a client getting a particular score, check that now.
+      if( $Game::EndGameScore > 0 && %sourceClient.score >= $Game::EndGameScore  )
+         cycleGame();
+</pre>
+	<h3>
+		And replace it with:<br>
+	</h3>
+	<pre>
+      //UAISK Team: Start
+      //If we're not in a free for all and are using team based scores, call the function
+      if ($Game::EndGameScore > 0 && $GoByTeamScores && !$AISK_FREE_FOR_ALL)
+          addUpTotalTeamScore(%sourceClient.team);
+      //If we're using individual scores, end the game if needed
+      else if ($Game::EndGameScore > 0 && %sourceClient.score >= $Game::EndGameScore)
+          cycleGame();
+      //UAISK Team: End
+</pre>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step25"></a>
+	<h2>
+		Part 6 - Step 25:</h2>
+	<h3>
+		If the player wants to use team based scoring, this function will get the team's score and end the game if needed.<br>
+		<br>
+		File- scripts/server/gameCore.cs<br>
+		Add to the end of the file:<br>
+	</h3>
+	<pre>
+//UAISK Team: Start
+//We're using team based scoring
+function addUpTotalTeamScore(%team)
+{
+    //Get the team's simset
+    %name = "TeamSet" @ %team;
+
+    //Get the number of things in this simgroup
+    %n = %name.getCount();
+
+    for (%i = 0; %i < %n; %i++)
+    {
+        //Get a member of this team
+        %obj = %name.getObject(%i);
+
+        //Get the player or bot's score
+        if (%obj.getClassName() !$= "Player")
+            %temp = %obj.fakeClient.score;
+        else
+            %temp = %obj.client.score;
+
+        //Add the scores up
+        %score += %temp;
+    }
+
+    //If the total score was enough, end the game and start a new one
+    if (%score >= $Game::EndGameScore)
+         cycleGame();
+}
+//UAISK Team: End
+</pre>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step26"></a>
+	<h2>
+		Part 6 - Step 26:</h2>
+	<h3>
+		Once again, this will check if the player wants to use individual or team based scores.<br>
+		<br>
+		File- scripts/server/player.cs<br>
+		Function- Armor::damage()<br>
+		Find:<br>
+	</h3>
+	<pre>
+            //End the game if we should
+            if (%sourceClient.score >= $Game::EndGameScore)
+                cycleGame();
+</pre>
+	<h3>
+		And replace it with:<br>
+	</h3>
+	<pre>
+            //If we're not in a free for all and are using team based scores, call the function
+            if ($GoByTeamScores && !$AISK_FREE_FOR_ALL)
+                addUpTotalTeamScore(%sourceClient.team);
+            //If we're using individual scores, end the game if needed
+            else if (%sourceClient.score >= $Game::EndGameScore)
+                cycleGame();
+</pre>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Step27"></a>
+	<h2>
+		Part 7 - Step 27:</h2>
+	<h3>
+		In part 7 we will be adding script to clear the scoreboard when the next mission is cycled to.<br>
+		<br>
+		File- scripts/server/game.cs<br>
+		Function- onCyclePauseEnd()<br>
+		After:<br>
+	</h3>
+	<pre>
+$Game::Cycling = false;
+</pre>
+	<h3>
+		Add:<br>
+	</h3>
+	<pre>
+   //UAISK Team: Start
+   //Get the number of players and bots on the list
+   %count = PlayerListGuiList.rowCount();
+   //Set this to 0 for later use
+   %j = 0;
+
+   //Cycle through each row on the player list
+   for (%i = 0; %i < %count; %i++)
+   {
+      //Get the player or fake client that this row of the list holds
+      %obj = PlayerListGuiList.getRowId(%j);
+
+      //If it is a fake client, remove it
+      if (%obj.isBot)
+         PlayerListGuiList.removeRow(%j);
+      //If it is a player, reset his scores
+      else
+      {
+         %obj.score = 0;
+         %obj.kills = 0;
+         %obj.deaths = 0;
+         //When rows are not removed, we need to skip that row later
+         %j++;
+      }
+   }
+   //UAISK Team: End
+</pre>
+	<br>
+	<hr class="Line2">
+	<br>
+	<a name="Step28"></a>
+	<h2>
+		Part 8 - Step 28:</h2>
+	<h3>
+		In part 8 we will be making the bot's name appear as the killer in the chat text. This part is for <i>T3D 1.1.0</i> only. If
+		you are using <i>T3D 1.2.0</i>, this part will not work as is.<br>
+		<br>
+		File- scripts/server/gameCore.cs<br>
+		Function- GameCore::onDeath()<br>
+		Replace:<br>
+	</h3>
+	<pre>
+      // If the killer was a bot, don't try to get its name
+      if (isObject(%sourceClient))
+      {
+          // Only give points for killing the other team
+          if (%sourceClient.team == %client.team)
+              game.incScore( %sourceClient, -1, true );
+          else
+          {
+              game.incScore( %sourceClient, 1, true );
+              game.incKills( %sourceClient, 1, true );
+          }
+
+          game.incDeaths( %client, 1, true );
+      
+          messageAll('MsgClientScoreChanged', "", %sourceClient.score, %sourceClient.kills, %sourceClient.deaths, %sourceClient);
+          messageAll('MsgClientScoreChanged', "", %client.score, %client.kills, %client.deaths, %client);
+          messageAll('MsgClientKilled', '%1 gets nailed by %2!', %client.playerName, %sourceClient.playerName);
+      }
+      else
+      {
+          game.incDeaths( %client, 1, true );
+          messageAll('MsgClientScoreChanged', "", %client.score, %client.kills, %client.deaths, %client);
+          messageAll('MsgClientKilled','%1 gets nailed by a bot!', %client.playerName);
+      }
+
+      //UAISK Team: Start
+</pre>
+	<h3>
+		With:<br>
+	</h3>
+	<pre>
+      //UAISK Team: Start
+      // Only give points for killing the other team
+      if (%sourceClient.team == %client.team)
+          game.incScore( %sourceClient, -1, true );
+      else
+      {
+          game.incScore( %sourceClient, 1, true );
+          game.incKills( %sourceClient, 1, true );
+      }
+
+      game.incDeaths( %client, 1, false );
+
+      messageAll('MsgClientScoreChanged', "", %sourceClient.score, %sourceClient.kills, %sourceClient.deaths, %sourceClient);
+      messageAll('MsgClientScoreChanged', "", %client.score, %client.kills, %client.deaths, %client);
+
+      //Get either the bot's name or the player's name
+      if (%sourceClient.isBot)
+         messageAll('MsgClientKilled', '%1 gets nailed by %2!', %client.playerName, %sourceClient.realName);
+      else
+         messageAll('MsgClientKilled', '%1 gets nailed by %2!', %client.playerName, %sourceClient.playerName);
+</pre>
+</body>
+</html>
