@@ -382,6 +382,30 @@ function AIPlayer::Think(%this, %obj)
         //Scedhule ourselves to think at our regular interval
         %this.ailoop = %this.schedule($AISK_SCAN_TIME * %obj.attentionlevel, "Think", %obj);
 
+    //When a bot takes damage his state is set to defending. A bot that is
+    //defending will have its attention set to its lowest level. It will sidestep
+    //to try to avoid the danger, and to throw some randomness into its movement.
+    //The bot will then go into a quick hold of 1 count.
+    case "Defending":
+        //Set the bot's move speed back to normal
+        %obj.setMoveSpeed(1.0);
+        %obj.isLost = 0;
+        %obj.assisting = 0;
+        %obj.nextNode = 0;
+
+        //Set the bot to it's highest awareness
+        %obj.attentionlevel = 1;
+        //Set the hldcnt to 1 less than the max
+        %obj.holdcnt = $AISK_HOLDCNT_MAX - 1;
+
+        //Sidestep to a random position
+        %this.sidestep(%obj, true);
+
+        //Set our action to 'Holding'
+        %obj.action = "Holding";
+        //Set a quick think schedule to start us looking for targets quickly.
+        %this.ailoop = %this.schedule($AISK_QUICK_THINK, "Think", %obj);
+
 //Item gathering has been commented out because it does not work properly
 /*
     case "GetHealth":
