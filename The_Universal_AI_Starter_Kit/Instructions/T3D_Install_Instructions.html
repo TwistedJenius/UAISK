@@ -22,7 +22,8 @@
 	<a class="Steps1" href="T3D_Install_Instructions.html#Step8" target="_top">Step 8</a><br>
 	<a class="Steps1" href="T3D_Install_Instructions.html#Step9" target="_top">Step 9</a><br>
 	<a href="T3D_Install_Instructions.html#Instruction2" target="_top">Optional Custom Install Instructions</a><br>
-	<a class="Steps1" href="T3D_Install_Instructions.html#Step13" target="_top">Step 1</a><br>
+	<a class="Steps1" href="T3D_Install_Instructions.html#Step10" target="_top">Step 1</a><br>
+	<a class="Steps1" href="T3D_Install_Instructions.html#Step11" target="_top">Step 2</a><br>
 	<a name="Instruction3"></a>
 	<br>
 	<h1>
@@ -50,7 +51,7 @@
 	<h3>
 		A custom install should be used when integrating The Universal AI Starter Kit into a pre-existing project. Doing a custom install
 		is not needed if you can or have done a quick install. The instructions in this section are mandatory for a custom install, optional
-		instructions are below. These instructions are for a new project created using the "full" template in <i>T3D 1.2.0</i>. If you're
+		instructions are below. These instructions are for a new project created using the "full" template in <i>T3D 3.10.0</i>. If you're
 		unclear on exactly how/where something should be installed, use the quick install files as an example.<br>
 	</h3>
 	<br>
@@ -248,7 +249,7 @@ exec("./UAISK/aiExecutes.cs");
 		Step 8:</h2>
 	<h3>
 		In the folder: scripts/server/<br>
-		Add the entire <i>UAISK</i> folder; including all of the files it contains (which should total 14). Make sure to use the correct
+		Add the entire <i>UAISK</i> folder; including all of the files it contains (which should total 16). Make sure to use the correct
 		version for your engine.
 	</h3>
 	<br>
@@ -265,8 +266,6 @@ exec("./UAISK/aiExecutes.cs");
 			tools/worldEditor/scripts/AIMEMain.cs<br>
 			tools/worldEditor/scripts/AIPathEditor.cs<br>
 		</i>
-		<br>
-		Make sure to use the correct version for your engine.
 	</h3>
 	<hr class="Line2">
 	<br>
@@ -275,13 +274,12 @@ exec("./UAISK/aiExecutes.cs");
 	<h1>
 		Optional Custom Install Instructions:</h1>
 	<h3>
-		These instructions are an optional part of a custom install. This will add the <a href="Usage_Instructions.html#Instruction23"
-			target="_blank">AI Marker Editor</a> to the bottom of your "Edit" menu within the mission editor. If you're having problems
-		while doing a custom installation, try skipping this part. This step is for the <i>T3D Professional</i> version only and is not
-		included in the quick install files.<br>
+		These instructions are an optional part of a custom install. If you're having problems
+		while doing a custom installation, try skipping this part. This step is not included in the quick install files.
+		Be sure to backup these files before changing them.<br>
 	</h3>
 	<br>
-	<a name="Step13"></a>
+	<a name="Step10"></a>
 	<h2>
 		Step 1:</h2>
 	<h3>
@@ -300,6 +298,32 @@ exec("./UAISK/aiExecutes.cs");
       item[17] = "-";
       item[18] = "AI Marker Editor" TAB "Alt A" TAB "toggleAIMarkerEditor(1);";
       //AISK Changes: End
+</pre>
+	<br>
+	<hr class="Line1">
+	<br>
+	<a name="Step11"></a>
+	<h2>
+		Step 2:</h2>
+	<h3>
+		File- scripts/server/player.cs<br>
+		Function- PlayerData::damage()<br>
+		After the line:<br>
+	</h3>
+	<pre>
+   if (!isObject(%obj) || %obj.getState() $= "Dead" || !%damage)
+      return;
+</pre>
+	<h3>
+		Add:<br>
+	</h3>
+	<pre>
+   //If friendly fire is turned off, and the source and target are on the same team, then return
+   if ($AISK_FRIENDLY_FIRE == false && $AISK_FREE_FOR_ALL == false)
+   {
+        if (%sourceObject.team == %obj.team)
+            return;
+   }
 </pre>
 </body>
 </html>
